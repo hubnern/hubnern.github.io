@@ -1,0 +1,65 @@
+<html>
+
+<head>
+	<title>Diff 7</title>
+	<style>
+		#diffs {
+			display: flex;
+			height: 100%;
+		}
+
+		#diffs div {
+			margin: 0 0.5em;
+			height: 100%;
+			width: 50%
+		}
+
+		iframe {
+			height: calc(100% - 4em);
+			width: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+		}
+
+		p {
+			text-align: center;
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="diffs">
+		<div>
+			<p id="p1"></p>
+			<iframe id="diff1"></iframe>
+		</div>
+		<div>
+			<p id="p2"></p>
+			<iframe id="diff2"></iframe>
+		</div>
+	</div>
+</body>
+<script>
+	function rnd() {
+		return Math.random() < 0.5
+	}
+	let alpha = "../seed/diff7.html"
+	let beta = "../lcs/diff7.html"
+	if (rnd()) {
+		document.getElementById("diff1").src = alpha
+		document.getElementById("p1").innerText = "alpha"
+		document.getElementById("diff2").src = beta
+		document.getElementById("p2").innerText = "beta"
+	} else {
+		document.getElementById("diff1").src = beta
+		document.getElementById("p1").innerText = "beta"
+		document.getElementById("diff2").src = alpha
+		document.getElementById("p2").innerText = "alpha"
+	}
+</script>
+
+</html>
