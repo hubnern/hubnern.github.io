@@ -15,7 +15,7 @@
 		}
 
 		iframe {
-			height: calc(100% - 4em);
+			height: calc(100% - 5.5em);
 			width: 100%;
 		}
 
@@ -24,14 +24,25 @@
 			height: 100%;
 		}
 
-		p {
+		p, a {
 			text-align: center;
 			font-family: sans-serif;
+		}
+		#links {
+			display: flex;
+			justify-content: center;
+		}
+		a {
+			margin: 0 1em;
 		}
 	</style>
 </head>
 
 <body>
+	<div id="links">
+		<a href="viewer4.html">prev</a>
+		<a href="viewer6.html">next</a>
+	</div>
 	<div id="diffs">
 		<div>
 			<p id="p1"></p>
