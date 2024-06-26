@@ -24,7 +24,7 @@
 			height: 100%;
 		}
 
-		p, a {
+		h1, a {
 			text-align: center;
 			font-family: sans-serif;
 		}
@@ -45,11 +45,11 @@
 	</div>
 	<div id="diffs">
 		<div>
-			<p id="p1"></p>
+			<h1 id="p1"></h1>
 			<iframe id="diff1"></iframe>
 		</div>
 		<div>
-			<p id="p2"></p>
+			<h1 id="p2"></h1>
 			<iframe id="diff2"></iframe>
 		</div>
 	</div>
@@ -62,14 +62,14 @@
 	let beta = "../beta/diff5.html"
 	if (rnd()) {
 		document.getElementById("diff1").src = alpha
-		document.getElementById("p1").innerText = "alpha"
+		document.getElementById("p1").innerText = "ALPHA"
 		document.getElementById("diff2").src = beta
-		document.getElementById("p2").innerText = "beta"
+		document.getElementById("p2").innerText = "BETA"
 	} else {
 		document.getElementById("diff1").src = beta
-		document.getElementById("p1").innerText = "beta"
+		document.getElementById("p1").innerText = "BETA"
 		document.getElementById("diff2").src = alpha
-		document.getElementById("p2").innerText = "alpha"
+		document.getElementById("p2").innerText = "ALPHA"
 	}
 </script>
 
