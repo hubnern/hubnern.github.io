@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .column {
+            width: 100%;
+            height: 100%;
+        }
+
+        .updated {
+            background-color: #FFF59D;
+        }
+
+        .added {
+            background-color: #A5D6A7;
+        }
+
+        .deleted {
+            background-color: #EF9A9A;
+        }
+
+        .moved_updated, .moved_unchanged {
+            background-color: #CE93D8;
+        }
+
+        .none {
+            background-color: #64B5F6;
+        }
+
+        .selected {
+            color: #2196F3 !important;
+        }
+
+
+    </style>
+    <title>CiDiff</title>
+</head>
+
+<body>
+<div class='row'>
+    <div class='column' id='right'>
+    </div>
+</div>
+<script>
+    const ciDiff = {
+        left: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: MOLAorg/mola/.github/workflows/check-clang-format.yml@refs/heads/develop",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 1 (hosted)",
+                "Current runner version: '2.308.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20230903.1.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20230903.1/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20230903.1",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.299.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Actions: write",
+                "Checks: write",
+                "Contents: write",
+                "Deployments: write",
+                "Discussions: write",
+                "Issues: write",
+                "Metadata: read",
+                "Packages: write",
+                "Pages: write",
+                "PullRequests: write",
+                "RepositoryProjects: write",
+                "SecurityEvents: write",
+                "Statuses: write",
+                "##[endgroup]",
+                "Secret source: Actions",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'actions/checkout@master' (SHA:72f2cec99f417b1a1c5e2e88945068983b7965f9)",
+                "Complete job name: clang-format-check",
+                "##[group]Run actions/checkout@master",
+                "with:",
+                "  repository: MOLAorg/mola",
+                "  token: ***",
+                "  ssh-strict: true",
+                "  persist-credentials: true",
+                "  clean: true",
+                "  sparse-checkout-cone-mode: true",
+                "  fetch-depth: 1",
+                "  fetch-tags: false",
+                "  show-progress: true",
+                "  lfs: false",
+                "  submodules: false",
+                "  set-safe-directory: true",
+                "##[endgroup]",
+                "Syncing repository: MOLAorg/mola",
+                "##[group]Getting Git version info",
+                "Working directory is '/home/runner/work/mola/mola'",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "##[endgroup]",
+                "Temporarily overriding HOME='/home/runner/work/_temp/50fb96b1-bf74-4a54-bb0b-8e4bab86bdb5' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/mola/mola",
+                "Deleting the contents of '/home/runner/work/mola/mola'",
+                "##[group]Initializing the repository",
+                "[command]/usr/bin/git init /home/runner/work/mola/mola",
+                "hint: Using 'master' as the name for the initial branch. This default branch name",
+                "hint: is subject to change. To configure the initial branch name to use in all",
+                "hint: of your new repositories, which will suppress this warning, call:",
+                "hint: ",
+                "hint: 	git config --global init.defaultBranch <name>",
+                "hint: ",
+                "hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and",
+                "hint: 'development'. The just-created branch can be renamed via this command:",
+                "hint: ",
+                "hint: 	git branch -m <name>",
+                "Initialized empty Git repository in /home/runner/work/mola/mola/.git/",
+                "[command]/usr/bin/git remote add origin https://github.com/MOLAorg/mola",
+                "##[endgroup]",
+                "##[group]Disabling automatic garbage collection",
+                "[command]/usr/bin/git config --local gc.auto 0",
+                "##[endgroup]",
+                "##[group]Setting up auth",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+                "##[endgroup]",
+                "##[group]Fetching the repository",
+                "[command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5934b10e5e3660f827a701a04ba8febd6fd31028:refs/remotes/origin/develop",
+                "From https://github.com/MOLAorg/mola",
+                " * [new ref]         5934b10e5e3660f827a701a04ba8febd6fd31028 -> origin/develop",
+                "##[endgroup]",
+                "##[group]Determining the checkout info",
+                "##[endgroup]",
+                "##[group]Checking out the ref",
+                "[command]/usr/bin/git checkout --progress --force -B develop refs/remotes/origin/develop",
+                "Switched to a new branch 'develop'",
+                "branch 'develop' set up to track 'origin/develop'.",
+                "##[endgroup]",
+                "[command]/usr/bin/git log -1 --format='%H'",
+                "'5934b10e5e3660f827a701a04ba8febd6fd31028'",
+                "##[group]Run git submodule sync",
+                "git submodule sync",
+                "git submodule update --init --recursive",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "Submodule 'modules/mola_common' (https://github.com/MOLAorg/mola_common.git) registered for path 'modules/mola_common'",
+                "Submodule 'modules/mola_demos' (https://github.com/MOLAorg/mola_demos.git) registered for path 'modules/mola_demos'",
+                "Submodule 'modules/mola_imu_preintegration' (https://github.com/MOLAorg/mola_imu_preintegration.git) registered for path 'modules/mola_imu_preintegration'",
+                "Submodule 'modules/mola_input_euroc_dataset' (https://github.com/MOLAorg/mola_input_euroc_dataset.git) registered for path 'modules/mola_input_euroc_dataset'",
+                "Submodule 'modules/mola_input_kitti_dataset' (https://github.com/MOLAorg/mola_input_kitti_dataset.git) registered for path 'modules/mola_input_kitti_dataset'",
+                "Submodule 'modules/mola_input_rawlog' (https://github.com/MOLAorg/mola_input_rawlog.git) registered for path 'modules/mola_input_rawlog'",
+                "Submodule 'modules/mola_input_ros2' (https://github.com/MOLAorg/mola_input_ros2.git) registered for path 'modules/mola_input_ros2'",
+                "Submodule 'modules/mola_kernel' (https://github.com/MOLAorg/mola_kernel.git) registered for path 'modules/mola_kernel'",
+                "Submodule 'modules/mola_launcher' (https://github.com/MOLAorg/mola_launcher.git) registered for path 'modules/mola_launcher'",
+                "Submodule 'modules/mola_test_datasets' (https://github.com/MOLAorg/mola_test_datasets.git) registered for path 'modules/mola_test_datasets'",
+                "Submodule 'modules/mola_viz' (https://github.com/MOLAorg/mola_viz.git) registered for path 'modules/mola_viz'",
+                "Submodule 'modules/mola_yaml' (https://github.com/MOLAorg/mola_yaml.git) registered for path 'modules/mola_yaml'",
+                "Submodule 'modules/mp2p_icp' (https://github.com/MOLAorg/mp2p_icp.git) registered for path 'modules/mp2p_icp'",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_common'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_demos'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_imu_preintegration'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_euroc_dataset'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_kitti_dataset'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_rawlog'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_ros2'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_kernel'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_launcher'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_test_datasets'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_viz'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_yaml'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mp2p_icp'...",
+                "Submodule path 'modules/mola_common': checked out 'bd3fa790b54e899939bddb70de157efd6315ae87'",
+                "Submodule path 'modules/mola_demos': checked out 'afc316d69b13e731799081504e37dad8e737664d'",
+                "Submodule path 'modules/mola_imu_preintegration': checked out '3188c56ea0aa6e0d51fc3083e6426ec2f4e63168'",
+                "Submodule path 'modules/mola_input_euroc_dataset': checked out 'e21354b034e94a5bdf9c7f08cca77f9960781e23'",
+                "Submodule path 'modules/mola_input_kitti_dataset': checked out '5c1f6e254f3aecfed169d283f5daeb4b5607e2d2'",
+                "Submodule path 'modules/mola_input_rawlog': checked out 'c95b5dabbc34ba894512b205bf2a4687731da58a'",
+                "Submodule path 'modules/mola_input_ros2': checked out '87ff11f3d58c0b43e910d6a73adcb69170f8e0ef'",
+                "Submodule path 'modules/mola_kernel': checked out '5db75549ad91d733d4e84c5e14d847bb6675c8a3'",
+                "Submodule path 'modules/mola_launcher': checked out '19db80813097f92dafeebbdbe0dcb6dffcc5b0c2'",
+                "Submodule path 'modules/mola_test_datasets': checked out '689eee945685e085e8f1a2cc79ff3bfcdfe8d96d'",
+                "Submodule path 'modules/mola_viz': checked out '51025a2add80bc3534a06577726aba17b2eec1f7'",
+                "Submodule path 'modules/mola_yaml': checked out '30e9087906a1e33d6b13d3f2969cf18bb72355ff'",
+                "Submodule path 'modules/mp2p_icp': checked out 'd1b6c2a557bbdc73da7490ca5134df4e180f88bd'",
+                "Submodule '3rdparty/libnabo' (https://github.com/ethz-asl/libnabo.git) registered for path 'modules/mp2p_icp/3rdparty/libnabo'",
+                "Submodule '3rdparty/libpointmatcher' (https://github.com/ethz-asl/libpointmatcher.git) registered for path 'modules/mp2p_icp/3rdparty/libpointmatcher'",
+                "Submodule '3rdparty/mola_common' (https://github.com/MOLAorg/mola_common.git) registered for path 'modules/mp2p_icp/3rdparty/mola_common'",
+                "Cloning into '/home/runner/work/mola/mola/modules/mp2p_icp/3rdparty/libnabo'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mp2p_icp/3rdparty/libpointmatcher'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mp2p_icp/3rdparty/mola_common'...",
+                "Submodule path 'modules/mp2p_icp/3rdparty/libnabo': checked out '37d7a766a365b725f084feb743ed1e749cade270'",
+                "From https://github.com/ethz-asl/libpointmatcher",
+                " * branch            8ce073fd1e2933f1c981d9690c6acb307a0824ed -> FETCH_HEAD",
+                "Submodule path 'modules/mp2p_icp/3rdparty/libpointmatcher': checked out '8ce073fd1e2933f1c981d9690c6acb307a0824ed'",
+                "Submodule path 'modules/mp2p_icp/3rdparty/mola_common': checked out '2b5eb7579822051e477d5960d2177efe0b5c4774'",
+                "##[group]Run sudo apt install clang-format-11 -yq",
+                "sudo apt install clang-format-11 -yq",
+                "pip3 install --user -r .github/python_clang_format_reqs.txt",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "",
+                "WARNING: apt does not have a stable CLI interface. Use with caution in scripts.",
+                "",
+                "Reading package lists...",
+                "Building dependency tree...",
+                "Reading state information...",
+                "The following additional packages will be installed:",
+                "  libclang-cpp11 libllvm11",
+                "The following NEW packages will be installed:",
+                "  clang-format-11 libclang-cpp11 libllvm11",
+                "0 upgraded, 3 newly installed, 0 to remove and 27 not upgraded.",
+                "Need to get 30.1 MB of archives.",
+                "After this operation, 130 MB of additional disk space will be used.",
+                "Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [142 B]",
+                "Get:2 http://azure.archive.ubuntu.com/ubuntu jammy/universe amd64 libllvm11 amd64 1:11.1.0-6 [19.6 MB]",
+                "Get:3 http://azure.archive.ubuntu.com/ubuntu jammy/universe amd64 libclang-cpp11 amd64 1:11.1.0-6 [10.5 MB]",
+                "Get:4 http://azure.archive.ubuntu.com/ubuntu jammy/universe amd64 clang-format-11 amd64 1:11.1.0-6 [44.6 kB]",
+                "Fetched 30.1 MB in 1s (29.0 MB/s)",
+                "Selecting previously unselected package libllvm11:amd64.",
+                "(Reading database ... ",
+                "(Reading database ... 5%",
+                "(Reading database ... 10%",
+                "(Reading database ... 15%",
+                "(Reading database ... 20%",
+                "(Reading database ... 25%",
+                "(Reading database ... 30%",
+                "(Reading database ... 35%",
+                "(Reading database ... 40%",
+                "(Reading database ... 45%",
+                "(Reading database ... 50%",
+                "(Reading database ... 55%",
+                "(Reading database ... 60%",
+                "(Reading database ... 65%",
+                "(Reading database ... 70%",
+                "(Reading database ... 75%",
+                "(Reading database ... 80%",
+                "(Reading database ... 85%",
+                "(Reading database ... 90%",
+                "(Reading database ... 95%",
+                "(Reading database ... 100%",
+                "(Reading database ... 223452 files and directories currently installed.)",
+                "Preparing to unpack .../libllvm11_1%3a11.1.0-6_amd64.deb ...",
+                "Unpacking libllvm11:amd64 (1:11.1.0-6) ...",
+                "Selecting previously unselected package libclang-cpp11.",
+                "Preparing to unpack .../libclang-cpp11_1%3a11.1.0-6_amd64.deb ...",
+                "Unpacking libclang-cpp11 (1:11.1.0-6) ...",
+                "Selecting previously unselected package clang-format-11.",
+                "Preparing to unpack .../clang-format-11_1%3a11.1.0-6_amd64.deb ...",
+                "Unpacking clang-format-11 (1:11.1.0-6) ...",
+                "Setting up libllvm11:amd64 (1:11.1.0-6) ...",
+                "Setting up libclang-cpp11 (1:11.1.0-6) ...",
+                "Setting up clang-format-11 (1:11.1.0-6) ...",
+                "Processing triggers for man-db (2.10.2-1) ...",
+                "Processing triggers for libc-bin (2.35-0ubuntu3.1) ...",
+                "NEEDRESTART-VER: 3.5",
+                "NEEDRESTART-KCUR: 5.15.0-1041-azure",
+                "NEEDRESTART-KEXP: 5.15.0-1041-azure",
+                "NEEDRESTART-KSTA: 1",
+                "Collecting argparse",
+                "  Downloading argparse-1.4.0-py2.py3-none-any.whl (23 kB)",
+                "Collecting colorlog",
+                "  Downloading colorlog-6.7.0-py2.py3-none-any.whl (11 kB)",
+                "Installing collected packages: argparse, colorlog",
+                "Successfully installed argparse-1.4.0 colorlog-6.7.0",
+                "##[group]Run echo \"TASK=lint_all\" >> $GITHUB_ENV",
+                "echo \"TASK=lint_all\" >> $GITHUB_ENV",
+                "bash .github/check_style.sh",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "INFO  | Initializing script...",
+                "WARNING | Using clang-format: b'Ubuntu clang-format version 11.1.0-6\\n'",
+                "WARNING | Using clang-format: b'Ubuntu clang-format version 11.1.0-6\\n'",
+                "INFO  | Initializing repo...",
+                "WARNING | Regexp to find source files: ()\\.(h|hxx|cpp|cc|cxx|H|HXX|CPP|CC|CXX|)$",
+                "WARNING | Executing clang-format on 0 files",
+                "Post job cleanup.",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "Temporarily overriding HOME='/home/runner/work/_temp/70e5f5b9-26ab-4eae-983b-e49b74c62883' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/mola/mola",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "Entering 'modules/mola_common'",
+                "Entering 'modules/mola_demos'",
+                "Entering 'modules/mola_imu_preintegration'",
+                "Entering 'modules/mola_input_euroc_dataset'",
+                "Entering 'modules/mola_input_kitti_dataset'",
+                "Entering 'modules/mola_input_rawlog'",
+                "Entering 'modules/mola_input_ros2'",
+                "Entering 'modules/mola_kernel'",
+                "Entering 'modules/mola_launcher'",
+                "Entering 'modules/mola_test_datasets'",
+                "Entering 'modules/mola_viz'",
+                "Entering 'modules/mola_yaml'",
+                "Entering 'modules/mp2p_icp'",
+                "Entering 'modules/mp2p_icp/3rdparty/libnabo'",
+                "Entering 'modules/mp2p_icp/3rdparty/libpointmatcher'",
+                "Entering 'modules/mp2p_icp/3rdparty/mola_common'",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "http.https://github.com/.extraheader",
+                "[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "Entering 'modules/mola_common'",
+                "Entering 'modules/mola_demos'",
+                "Entering 'modules/mola_imu_preintegration'",
+                "Entering 'modules/mola_input_euroc_dataset'",
+                "Entering 'modules/mola_input_kitti_dataset'",
+                "Entering 'modules/mola_input_rawlog'",
+                "Entering 'modules/mola_input_ros2'",
+                "Entering 'modules/mola_kernel'",
+                "Entering 'modules/mola_launcher'",
+                "Entering 'modules/mola_test_datasets'",
+                "Entering 'modules/mola_viz'",
+                "Entering 'modules/mola_yaml'",
+                "Entering 'modules/mp2p_icp'",
+                "Entering 'modules/mp2p_icp/3rdparty/libnabo'",
+                "Entering 'modules/mp2p_icp/3rdparty/libpointmatcher'",
+                "Entering 'modules/mp2p_icp/3rdparty/mola_common'",
+                "Cleaning up orphan processes",
+
+        ],
+        right: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: MOLAorg/mola/.github/workflows/check-clang-format.yml@refs/heads/develop",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 5 (hosted)",
+                "Current runner version: '2.309.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20230911.1.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20230911.1/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20230911.1",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.299.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Actions: write",
+                "Checks: write",
+                "Contents: write",
+                "Deployments: write",
+                "Discussions: write",
+                "Issues: write",
+                "Metadata: read",
+                "Packages: write",
+                "Pages: write",
+                "PullRequests: write",
+                "RepositoryProjects: write",
+                "SecurityEvents: write",
+                "Statuses: write",
+                "##[endgroup]",
+                "Secret source: Actions",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'actions/checkout@master' (SHA:72f2cec99f417b1a1c5e2e88945068983b7965f9)",
+                "Complete job name: clang-format-check",
+                "##[group]Run actions/checkout@master",
+                "with:",
+                "  repository: MOLAorg/mola",
+                "  token: ***",
+                "  ssh-strict: true",
+                "  persist-credentials: true",
+                "  clean: true",
+                "  sparse-checkout-cone-mode: true",
+                "  fetch-depth: 1",
+                "  fetch-tags: false",
+                "  show-progress: true",
+                "  lfs: false",
+                "  submodules: false",
+                "  set-safe-directory: true",
+                "##[endgroup]",
+                "Syncing repository: MOLAorg/mola",
+                "##[group]Getting Git version info",
+                "Working directory is '/home/runner/work/mola/mola'",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "##[endgroup]",
+                "Temporarily overriding HOME='/home/runner/work/_temp/460f07cf-fd80-4c3a-b1c2-a26db25f957d' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/mola/mola",
+                "Deleting the contents of '/home/runner/work/mola/mola'",
+                "##[group]Initializing the repository",
+                "[command]/usr/bin/git init /home/runner/work/mola/mola",
+                "hint: Using 'master' as the name for the initial branch. This default branch name",
+                "hint: is subject to change. To configure the initial branch name to use in all",
+                "hint: of your new repositories, which will suppress this warning, call:",
+                "hint: ",
+                "hint: 	git config --global init.defaultBranch <name>",
+                "hint: ",
+                "hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and",
+                "hint: 'development'. The just-created branch can be renamed via this command:",
+                "hint: ",
+                "hint: 	git branch -m <name>",
+                "Initialized empty Git repository in /home/runner/work/mola/mola/.git/",
+                "[command]/usr/bin/git remote add origin https://github.com/MOLAorg/mola",
+                "##[endgroup]",
+                "##[group]Disabling automatic garbage collection",
+                "[command]/usr/bin/git config --local gc.auto 0",
+                "##[endgroup]",
+                "##[group]Setting up auth",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+                "##[endgroup]",
+                "##[group]Fetching the repository",
+                "[command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0a23d595ad8b34cbfd3b3e8955808b636f777e5d:refs/remotes/origin/develop",
+                "From https://github.com/MOLAorg/mola",
+                " * [new ref]         0a23d595ad8b34cbfd3b3e8955808b636f777e5d -> origin/develop",
+                "##[endgroup]",
+                "##[group]Determining the checkout info",
+                "##[endgroup]",
+                "##[group]Checking out the ref",
+                "[command]/usr/bin/git checkout --progress --force -B develop refs/remotes/origin/develop",
+                "Switched to a new branch 'develop'",
+                "branch 'develop' set up to track 'origin/develop'.",
+                "##[endgroup]",
+                "[command]/usr/bin/git log -1 --format='%H'",
+                "'0a23d595ad8b34cbfd3b3e8955808b636f777e5d'",
+                "##[group]Run git submodule sync",
+                "git submodule sync",
+                "git submodule update --init --recursive",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "Submodule 'modules/mola_common' (https://github.com/MOLAorg/mola_common.git) registered for path 'modules/mola_common'",
+                "Submodule 'modules/mola_demos' (https://github.com/MOLAorg/mola_demos.git) registered for path 'modules/mola_demos'",
+                "Submodule 'modules/mola_imu_preintegration' (https://github.com/MOLAorg/mola_imu_preintegration.git) registered for path 'modules/mola_imu_preintegration'",
+                "Submodule 'modules/mola_input_euroc_dataset' (https://github.com/MOLAorg/mola_input_euroc_dataset.git) registered for path 'modules/mola_input_euroc_dataset'",
+                "Submodule 'modules/mola_input_kitti_dataset' (https://github.com/MOLAorg/mola_input_kitti_dataset.git) registered for path 'modules/mola_input_kitti_dataset'",
+                "Submodule 'modules/mola_input_rawlog' (https://github.com/MOLAorg/mola_input_rawlog.git) registered for path 'modules/mola_input_rawlog'",
+                "Submodule 'modules/mola_input_ros2' (https://github.com/MOLAorg/mola_input_ros2.git) registered for path 'modules/mola_input_ros2'",
+                "Submodule 'modules/mola_kernel' (https://github.com/MOLAorg/mola_kernel.git) registered for path 'modules/mola_kernel'",
+                "Submodule 'modules/mola_launcher' (https://github.com/MOLAorg/mola_launcher.git) registered for path 'modules/mola_launcher'",
+                "Submodule 'modules/mola_test_datasets' (https://github.com/MOLAorg/mola_test_datasets.git) registered for path 'modules/mola_test_datasets'",
+                "Submodule 'modules/mola_viz' (https://github.com/MOLAorg/mola_viz.git) registered for path 'modules/mola_viz'",
+                "Submodule 'modules/mola_yaml' (https://github.com/MOLAorg/mola_yaml.git) registered for path 'modules/mola_yaml'",
+                "Submodule 'modules/mp2p_icp' (https://github.com/MOLAorg/mp2p_icp.git) registered for path 'modules/mp2p_icp'",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_common'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_demos'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_imu_preintegration'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_euroc_dataset'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_kitti_dataset'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_rawlog'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_input_ros2'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_kernel'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_launcher'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_test_datasets'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_viz'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mola_yaml'...",
+                "Cloning into '/home/runner/work/mola/mola/modules/mp2p_icp'...",
+                "Submodule path 'modules/mola_common': checked out 'bd3fa790b54e899939bddb70de157efd6315ae87'",
+                "fatal: remote error: upload-pack: not our ref 22f283dcae0f001823de5405ed9028facc509209",
+                "fatal: Fetched in submodule path 'modules/mola_demos', but it did not contain 22f283dcae0f001823de5405ed9028facc509209. Direct fetching of that commit failed.",
+                "##[error]Process completed with exit code 128.",
+                "Post job cleanup.",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "Temporarily overriding HOME='/home/runner/work/_temp/92f61acd-745d-4203-ba2a-94a3fe0db751' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/mola/mola",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "Entering 'modules/mola_common'",
+                "Entering 'modules/mola_demos'",
+                "Entering 'modules/mola_imu_preintegration'",
+                "Entering 'modules/mola_input_euroc_dataset'",
+                "Entering 'modules/mola_input_kitti_dataset'",
+                "Entering 'modules/mola_input_rawlog'",
+                "Entering 'modules/mola_input_ros2'",
+                "Entering 'modules/mola_kernel'",
+                "Entering 'modules/mola_launcher'",
+                "Entering 'modules/mola_test_datasets'",
+                "Entering 'modules/mola_viz'",
+                "Entering 'modules/mola_yaml'",
+                "Entering 'modules/mp2p_icp'",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "http.https://github.com/.extraheader",
+                "[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "Entering 'modules/mola_common'",
+                "Entering 'modules/mola_demos'",
+                "Entering 'modules/mola_imu_preintegration'",
+                "Entering 'modules/mola_input_euroc_dataset'",
+                "Entering 'modules/mola_input_kitti_dataset'",
+                "Entering 'modules/mola_input_rawlog'",
+                "Entering 'modules/mola_input_ros2'",
+                "Entering 'modules/mola_kernel'",
+                "Entering 'modules/mola_launcher'",
+                "Entering 'modules/mola_test_datasets'",
+                "Entering 'modules/mola_viz'",
+                "Entering 'modules/mola_yaml'",
+                "Entering 'modules/mp2p_icp'",
+                "Cleaning up orphan processes",
+
+        ],
+    };
+</script>
+<script>
+    function getColor(type) {
+        switch (type) {
+            case "updated": return "#FFF59D";
+            case "added": return "#A5D6A7";
+            case "deleted": return "#EF9A9A";
+            case "moved_updated":
+            case "moved_unchanged": return "#CE93D8";
+            case "none": return "#CE93D8";
+        }
+    }
+
+    let right_actions = [
+            {type: "unchanged", left:1, right:1},
+            {type: "unchanged", left:2, right:2},
+            {type: "unchanged", left:3, right:3},
+            {type: "unchanged", left:4, right:4},
+            {type: "added", left:-1, right:5},
+            {type: "added", left:-1, right:6},
+            {type: "unchanged", left:7, right:7},
+            {type: "unchanged", left:8, right:8},
+            {type: "unchanged", left:9, right:9},
+            {type: "unchanged", left:10, right:10},
+            {type: "unchanged", left:11, right:11},
+            {type: "unchanged", left:12, right:12},
+            {type: "unchanged", left:13, right:13},
+            {type: "added", left:-1, right:14},
+            {type: "added", left:-1, right:15},
+            {type: "added", left:-1, right:16},
+            {type: "unchanged", left:17, right:17},
+            {type: "unchanged", left:18, right:18},
+            {type: "unchanged", left:19, right:19},
+            {type: "unchanged", left:20, right:20},
+            {type: "unchanged", left:21, right:21},
+            {type: "unchanged", left:22, right:22},
+            {type: "unchanged", left:23, right:23},
+            {type: "unchanged", left:24, right:24},
+            {type: "unchanged", left:25, right:25},
+            {type: "unchanged", left:26, right:26},
+            {type: "unchanged", left:27, right:27},
+            {type: "unchanged", left:28, right:28},
+            {type: "unchanged", left:29, right:29},
+            {type: "unchanged", left:30, right:30},
+            {type: "unchanged", left:31, right:31},
+            {type: "unchanged", left:32, right:32},
+            {type: "unchanged", left:33, right:33},
+            {type: "unchanged", left:34, right:34},
+            {type: "unchanged", left:35, right:35},
+            {type: "unchanged", left:36, right:36},
+            {type: "unchanged", left:37, right:37},
+            {type: "unchanged", left:38, right:38},
+            {type: "unchanged", left:39, right:39},
+            {type: "unchanged", left:40, right:40},
+            {type: "unchanged", left:41, right:41},
+            {type: "unchanged", left:42, right:42},
+            {type: "unchanged", left:43, right:43},
+            {type: "unchanged", left:44, right:44},
+            {type: "unchanged", left:45, right:45},
+            {type: "unchanged", left:46, right:46},
+            {type: "unchanged", left:47, right:47},
+            {type: "unchanged", left:48, right:48},
+            {type: "unchanged", left:49, right:49},
+            {type: "unchanged", left:50, right:50},
+            {type: "unchanged", left:51, right:51},
+            {type: "unchanged", left:52, right:52},
+            {type: "unchanged", left:53, right:53},
+            {type: "unchanged", left:54, right:54},
+            {type: "unchanged", left:55, right:55},
+            {type: "unchanged", left:56, right:56},
+            {type: "unchanged", left:57, right:57},
+            {type: "unchanged", left:58, right:58},
+            {type: "unchanged", left:59, right:59},
+            {type: "unchanged", left:60, right:60},
+            {type: "unchanged", left:61, right:61},
+            {type: "unchanged", left:62, right:62},
+            {type: "added", left:-1, right:63},
+            {type: "unchanged", left:64, right:64},
+            {type: "unchanged", left:65, right:65},
+            {type: "unchanged", left:66, right:66},
+            {type: "unchanged", left:67, right:67},
+            {type: "unchanged", left:68, right:68},
+            {type: "unchanged", left:69, right:69},
+            {type: "unchanged", left:70, right:70},
+            {type: "unchanged", left:71, right:71},
+            {type: "unchanged", left:72, right:72},
+            {type: "unchanged", left:73, right:73},
+            {type: "unchanged", left:74, right:74},
+            {type: "unchanged", left:75, right:75},
+            {type: "unchanged", left:76, right:76},
+            {type: "unchanged", left:77, right:77},
+            {type: "unchanged", left:78, right:78},
+            {type: "unchanged", left:79, right:79},
+            {type: "unchanged", left:80, right:80},
+            {type: "unchanged", left:81, right:81},
+            {type: "unchanged", left:82, right:82},
+            {type: "unchanged", left:83, right:83},
+            {type: "unchanged", left:84, right:84},
+            {type: "unchanged", left:85, right:85},
+            {type: "unchanged", left:86, right:86},
+            {type: "unchanged", left:87, right:87},
+            {type: "unchanged", left:88, right:88},
+            {type: "unchanged", left:89, right:89},
+            {type: "unchanged", left:90, right:90},
+            {type: "unchanged", left:91, right:91},
+            {type: "unchanged", left:92, right:92},
+            {type: "added", left:-1, right:93},
+            {type: "unchanged", left:94, right:94},
+            {type: "added", left:-1, right:95},
+            {type: "unchanged", left:96, right:96},
+            {type: "unchanged", left:97, right:97},
+            {type: "unchanged", left:98, right:98},
+            {type: "unchanged", left:99, right:99},
+            {type: "unchanged", left:100, right:100},
+            {type: "unchanged", left:101, right:101},
+            {type: "unchanged", left:102, right:102},
+            {type: "unchanged", left:103, right:103},
+            {type: "unchanged", left:104, right:104},
+            {type: "added", left:-1, right:105},
+            {type: "unchanged", left:106, right:106},
+            {type: "unchanged", left:107, right:107},
+            {type: "unchanged", left:108, right:108},
+            {type: "unchanged", left:109, right:109},
+            {type: "unchanged", left:110, right:110},
+            {type: "unchanged", left:111, right:111},
+            {type: "unchanged", left:112, right:112},
+            {type: "unchanged", left:113, right:113},
+            {type: "unchanged", left:114, right:114},
+            {type: "unchanged", left:115, right:115},
+            {type: "unchanged", left:116, right:116},
+            {type: "unchanged", left:117, right:117},
+            {type: "unchanged", left:118, right:118},
+            {type: "unchanged", left:119, right:119},
+            {type: "unchanged", left:120, right:120},
+            {type: "unchanged", left:121, right:121},
+            {type: "unchanged", left:122, right:122},
+            {type: "unchanged", left:123, right:123},
+            {type: "unchanged", left:124, right:124},
+            {type: "unchanged", left:125, right:125},
+            {type: "unchanged", left:126, right:126},
+            {type: "unchanged", left:127, right:127},
+            {type: "unchanged", left:128, right:128},
+            {type: "unchanged", left:129, right:129},
+            {type: "unchanged", left:130, right:130},
+            {type: "unchanged", left:131, right:131},
+            {type: "unchanged", left:132, right:132},
+            {type: "unchanged", left:133, right:133},
+            {type: "unchanged", left:134, right:134},
+            {type: "unchanged", left:135, right:135},
+            {type: "unchanged", left:136, right:136},
+            {type: "unchanged", left:137, right:137},
+            {type: "added", left:-1, right:138},
+            {type: "added", left:-1, right:139},
+            {type: "added", left:-1, right:140},
+            {type: "unchanged", left:241, right:141},
+            {type: "unchanged", left:242, right:142},
+            {type: "unchanged", left:243, right:143},
+            {type: "added", left:-1, right:144},
+            {type: "unchanged", left:245, right:145},
+            {type: "unchanged", left:246, right:146},
+            {type: "unchanged", left:247, right:147},
+            {type: "unchanged", left:248, right:148},
+            {type: "unchanged", left:249, right:149},
+            {type: "unchanged", left:250, right:150},
+            {type: "unchanged", left:251, right:151},
+            {type: "unchanged", left:252, right:152},
+            {type: "unchanged", left:253, right:153},
+            {type: "unchanged", left:254, right:154},
+            {type: "unchanged", left:255, right:155},
+            {type: "unchanged", left:256, right:156},
+            {type: "unchanged", left:257, right:157},
+            {type: "unchanged", left:258, right:158},
+            {type: "unchanged", left:259, right:159},
+            {type: "unchanged", left:260, right:160},
+            {type: "unchanged", left:261, right:161},
+            {type: "unchanged", left:265, right:162},
+            {type: "unchanged", left:266, right:163},
+            {type: "unchanged", left:267, right:164},
+            {type: "unchanged", left:268, right:165},
+            {type: "unchanged", left:269, right:166},
+            {type: "unchanged", left:270, right:167},
+            {type: "unchanged", left:271, right:168},
+            {type: "unchanged", left:272, right:169},
+            {type: "unchanged", left:273, right:170},
+            {type: "unchanged", left:274, right:171},
+            {type: "unchanged", left:275, right:172},
+            {type: "unchanged", left:276, right:173},
+            {type: "unchanged", left:277, right:174},
+            {type: "unchanged", left:278, right:175},
+            {type: "unchanged", left:279, right:176},
+            {type: "unchanged", left:280, right:177},
+            {type: "unchanged", left:281, right:178},
+            {type: "unchanged", left:285, right:179},
+    ]
+
+	// setup the folds between the "added" hunks
+	let folds = [];
+	for (let i = 1; i < right_actions.length; ++i) {
+		if (right_actions[i-1].type != "added" && right_actions[i].type == "added") {
+			let j = 1;
+			while (i-j >= 0 && right_actions[i-j].type != "added") { ++j; }
+			if (j > 6) {  // we keep a window of 3 lines arounds the "added" hunks
+				folds.push({start: i-j+5, end: i-3});
+			}
+		}
+	}
+	// in case there is non "added" lines after the last added line
+	let last_green = right_actions.length - 1;
+	while (right_actions[last_green].type != "added") { --last_green; }
+	if (last_green < right_actions.length - 4) {
+		folds.push({start: last_green + 5, end: right_actions.length});
+	}
+
+    require.config({paths: {'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'}});
+    require(['vs/editor/editor.main'], function () {
+        monaco.languages.register({
+            id: "cidiff",
+        })
+
+        monaco.languages.registerFoldingRangeProvider("cidiff", {
+            provideFoldingRanges: (model, context, token) => folds
+        })
+        let rightEditor = monaco.editor.create(document.getElementById('right'), {
+            value: ciDiff.right.join('\n'),
+            minimap: {enabled: false},
+            readOnly: true,
+            scrollBeyondLastLine: false,
+            language: "cidiff",
+            automaticLayout: true,
+            //wordWrap: "on"
+        });
+        rightEditor.trigger('fold', 'editor.foldAll')
+
+        function ranges(l, r, type) {
+            let sl = ciDiff.left[l].split(/\s/);
+            let sr = ciDiff.right[r].split(/\s/);
+            let x = 0;
+            let j = 0;
+            let arr = [];
+            for (let i = 0; i < sl.length; ++i) {
+                if (sl[i] == "") {
+                    ++x;
+                    continue;
+                }
+                if (sr[j] == "") {
+                    --i;
+                    ++j;
+                    continue;
+                }
+                if (sl[i] != sr[j]) {
+                    arr.push({
+                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sl[i].length),
+                        options: {isWholeLine: false, className: type, overviewRuler: {color: getColor(type)}}
+                    });
+                }
+                x += sl[i].length + 1;
+                ++j;
+            }
+            return arr;
+        }
+
+        function mapToDecorations(actions) {
+            return actions.flatMap((a, i) => {
+                let arr = []
+                if (a.type == "unchanged") {
+                    return arr;
+                }
+                if (a.type.includes("updated")) {
+                    if (a.type == "moved_updated") {
+                        arr.push({
+                            range: new monaco.Range(i + 1, 1, i + 1, 1),
+                            options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                        });
+                    }
+                    //let tmp = ranges(i, left_actions[i].line-1, a.type);
+                    //console.log(i, left_actions[i].line-1, tmp);
+                    arr.push(...ranges(actions[i].left - 1, actions[i].right - 1, a.type));
+                } else {
+                    arr.push({
+                        range: new monaco.Range(i + 1, 1, i + 1, 1),
+                        options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                    });
+                }
+                return arr;
+            })
+        }
+
+        let rightDecorations = rightEditor.createDecorationsCollection(mapToDecorations(right_actions));
+
+    });
+</script>
+</body>
+
+</html>

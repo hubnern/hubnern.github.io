@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .column {
+            width: 100%;
+            height: 100%;
+        }
+
+        .updated {
+            background-color: #FFF59D;
+        }
+
+        .added {
+            background-color: #A5D6A7;
+        }
+
+        .deleted {
+            background-color: #EF9A9A;
+        }
+
+        .moved_updated, .moved_unchanged {
+            background-color: #CE93D8;
+        }
+
+        .none {
+            background-color: #64B5F6;
+        }
+
+        .selected {
+            color: #2196F3 !important;
+        }
+
+
+    </style>
+    <title>CiDiff</title>
+</head>
+
+<body>
+<div class='row'>
+    <div class='column' id='right'>
+    </div>
+</div>
+<script>
+    const ciDiff = {
+        left: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: aliyun/terraform-provider-alicloud/.github/workflows/pull_requests.yml@refs/pull/6653/merge",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 7 (hosted)",
+                "Current runner version: '2.311.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20231030.2.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20231030.2/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20231030.2",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.312.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Actions: read",
+                "Checks: read",
+                "Contents: read",
+                "Deployments: read",
+                "Discussions: read",
+                "Issues: read",
+                "Metadata: read",
+                "Packages: read",
+                "Pages: read",
+                "PullRequests: read",
+                "RepositoryProjects: read",
+                "SecurityEvents: read",
+                "Statuses: read",
+                "##[endgroup]",
+                "Secret source: None",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'jitterbit/get-changed-files@v1' (SHA:b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42)",
+                "Complete job name: Pull Request Title",
+                "##[group]Run jitterbit/get-changed-files@v1",
+                "with:",
+                "  format: json",
+                "  token: ***",
+                "##[endgroup]",
+                "Base commit: aeb99bd8347e1c2857ab9a5e79939a1d8cc8d1d9",
+                "Head commit: cc9370f928bd5d866d6200ecc83184a4f34538f5",
+                "All: [\"alicloud/data_source_alicloud_cloud_firewall_control_policies.go\",\"alicloud/data_source_alicloud_cloud_firewall_control_policies_test.go\",\"alicloud/provider.go\"]",
+                "Added: []",
+                "Modified: [\"alicloud/data_source_alicloud_cloud_firewall_control_policies.go\",\"alicloud/data_source_alicloud_cloud_firewall_control_policies_test.go\",\"alicloud/provider.go\"]",
+                "Removed: []",
+                "Renamed: []",
+                "Added or modified: [\"alicloud/data_source_alicloud_cloud_firewall_control_policies.go\",\"alicloud/data_source_alicloud_cloud_firewall_control_policies_test.go\",\"alicloud/provider.go\"]",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[group]Run exitCode=0",
+                "exitCode=0",
+                "prTitle=\"data-source/alicloud_cloud_firewall_control_policies: Fixed the read invalid error when using an international account\"",
+                "echo -e \"PR Title: \\033${prTitle}\\033\"",
+                "if [[ ${prTitle} == *\"…\" ]]; then",
+                "  echo -e \"\\nERROR: The PR title should not omit important infos about added or modified files. \\033xxx... is not recommended.\\033\"",
+                "  exitCode=1",
+                "fi",
+                "docsOnly=true",
+                "testcaseOnly=true",
+                "docsChanged=false",
+                "testcaseChanged=false",
+                "readarray -t added_files <<<\"$(jq -r '.[]' <<<'[]')\"",
+                "for added_file in ${added_files[@]}; do",
+                "  if [[ ${added_file} == *?_test.go ]]; then",
+                "      testcaseChanged=true",
+                "      continue",
+                "  fi",
+                "  if [[ ${added_file} == \"website/docs\"* ]]; then",
+                "      testcaseOnly=false",
+                "      docsChanged=true",
+                "      continue",
+                "  fi",
+                "  if [[ ${added_file} == \"alicloud/resource_alicloud\"* ]]; then",
+                "      docsOnly=false",
+                "      testcaseOnly=false",
+                "      prefix=\"alicloud/resource_\"",
+                "      suffix=\".go\"",
+                "      resourceName=${added_file}",
+                "      resourceName=${resourceName#\"$prefix\"}",
+                "      resourceName=${resourceName%\"$suffix\"}",
+                "      titleStr=\"New Resource: ${resourceName}\"",
+                "      if [[ ${prTitle} != *\"${titleStr}\"* ]]; then",
+                "        echo -e \"\\nERROR: The PR title should contains new resource info \\033${titleStr}\\033\"",
+                "        exitCode=1",
+                "      fi",
+                "      continue",
+                "  fi",
+                "  if [[ ${added_file} == \"alicloud/data_source_alicloud\"* ]]; then",
+                "      docsOnly=false",
+                "      testcaseOnly=false",
+                "      prefix=\"alicloud/data_source_\"",
+                "      suffix=\".go\"",
+                "      resourceName=${added_file}",
+                "      resourceName=${resourceName#\"$prefix\"}",
+                "      resourceName=${resourceName%\"$suffix\"}",
+                "      titleStr=\"New Data Source: ${resourceName}\"",
+                "      if [[ ${prTitle} != *\"${titleStr}\"* ]]; then",
+                "        echo -e \"\\nERROR: The PR title should contains new datasource info \\033${titleStr}\\033\"",
+                "        exitCode=1",
+                "      fi",
+                "      continue",
+                "  fi",
+                "done",
+                "readarray -t modified_files <<<\"$(jq -r '.[]' <<<'[\"alicloud/data_source_alicloud_cloud_firewall_control_policies.go\",\"alicloud/data_source_alicloud_cloud_firewall_control_policies_test.go\",\"alicloud/provider.go\"]')\"",
+                "for modified_file in ${modified_files[@]}; do",
+                "  if [[ ${modified_file} == *?_test.go ]]; then",
+                "      testcaseChanged=true",
+                "      continue",
+                "  fi",
+                "  if [[ ${modified_file} == \"website/docs\"* ]]; then",
+                "      testcaseOnly=false",
+                "      docsChanged=true",
+                "      continue",
+                "  fi",
+                "  if [[ ${modified_file} == \"alicloud/resource_alicloud\"* ]]; then",
+                "      docsOnly=false",
+                "      testcaseOnly=false",
+                "      prefix=\"alicloud/resource_\"",
+                "      suffix=\".go\"",
+                "      resourceName=${modified_file}",
+                "      resourceName=${resourceName#\"$prefix\"}",
+                "      resourceName=${resourceName%\"$suffix\"}",
+                "      titleStr=\"resource/${resourceName}: \"",
+                "      if [[ ${prTitle} != *\"${titleStr}\"* ]]; then",
+                "        echo -e \"\\nERROR: The PR title should contains modified info like \\033${titleStr}xxx\\033\"",
+                "        exitCode=1",
+                "      fi",
+                "  fi",
+                "  if [[ ${modified_file} == \"alicloud/data_source_alicloud\"* ]]; then",
+                "      docsOnly=false",
+                "      testcaseOnly=false",
+                "      prefix=\"alicloud/data_source_\"",
+                "      suffix=\".go\"",
+                "      resourceName=${modified_file}",
+                "      resourceName=${resourceName#\"$prefix\"}",
+                "      resourceName=${resourceName%\"$suffix\"}",
+                "      titleStr=\"data-source/${resourceName}: \"",
+                "      if [[ ${prTitle} != *\"${titleStr}\"* ]]; then",
+                "        echo -e \"\\nERROR: The PR title should contains modified info like \\033${titleStr}xxx\\033\"",
+                "        exitCode=1",
+                "      fi",
+                "  fi",
+                "done",
+                "if [[ ${docsChanged} == true && ${docsOnly} == true ]]; then",
+                "  titleStr=\"docs: \"",
+                "  if [[ ${prTitle} != \"${titleStr}\"* ]]; then",
+                "    echo -e \"\\nERROR: The PR title should contains docs modified info like \\033${titleStr}xxx\\033\"",
+                "    exitCode=1",
+                "  fi",
+                "elif [[ ${testcaseChanged} == true && ${testcaseOnly} == true ]]; then",
+                "  titleStr=\"testcase: \"",
+                "  if [[ ${prTitle} != *\"${titleStr}\"* ]]; then",
+                "    echo -e \"\\nERROR: The PR title should contains testcase modified info like \\033${titleStr}xxx\\033\"",
+                "    exitCode=1",
+                "  fi",
+                "fi",
+                "",
+                "exit ${exitCode}",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "PR Title: data-source/alicloud_cloud_firewall_control_policies: Fixed the read invalid error when using an international account",
+                "Cleaning up orphan processes",
+
+        ],
+        right: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: aliyun/terraform-provider-alicloud/.github/workflows/pull_requests.yml@refs/pull/6654/merge",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 10 (hosted)",
+                "Current runner version: '2.311.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20231030.2.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20231030.2/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20231030.2",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.312.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Actions: read",
+                "Checks: read",
+                "Contents: read",
+                "Deployments: read",
+                "Discussions: read",
+                "Issues: read",
+                "Metadata: read",
+                "Packages: read",
+                "Pages: read",
+                "PullRequests: read",
+                "RepositoryProjects: read",
+                "SecurityEvents: read",
+                "Statuses: read",
+                "##[endgroup]",
+                "Secret source: None",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'jitterbit/get-changed-files@v1' (SHA:b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42)",
+                "Complete job name: Pull Request Title",
+                "##[group]Run jitterbit/get-changed-files@v1",
+                "with:",
+                "  format: json",
+                "  token: ***",
+                "##[endgroup]",
+                "Base commit: aeb99bd8347e1c2857ab9a5e79939a1d8cc8d1d9",
+                "Head commit: 3f3efc1593bb5e6685556f7670b5f3b966736daa",
+                "##[error]The head commit for this pull_request event is not ahead of the base commit. Please submit an issue on this action's GitHub repo.",
+                "All: [\"website/docs/r/cs_edge_kubernetes.html.markdown\",\"website/docs/r/cs_kubernetes.html.markdown\",\"website/docs/r/cs_managed_kubernetes.html.markdown\",\"website/docs/r/cs_serverless_kubernetes.html.markdown\"]",
+                "Added: []",
+                "Modified: [\"website/docs/r/cs_edge_kubernetes.html.markdown\",\"website/docs/r/cs_kubernetes.html.markdown\",\"website/docs/r/cs_managed_kubernetes.html.markdown\",\"website/docs/r/cs_serverless_kubernetes.html.markdown\"]",
+                "Removed: []",
+                "Renamed: []",
+                "Added or modified: [\"website/docs/r/cs_edge_kubernetes.html.markdown\",\"website/docs/r/cs_kubernetes.html.markdown\",\"website/docs/r/cs_managed_kubernetes.html.markdown\",\"website/docs/r/cs_serverless_kubernetes.html.markdown\"]",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/",
+                "Cleaning up orphan processes",
+
+        ],
+    };
+</script>
+<script>
+    function getColor(type) {
+        switch (type) {
+            case "updated": return "#FFF59D";
+            case "added": return "#A5D6A7";
+            case "deleted": return "#EF9A9A";
+            case "moved_updated":
+            case "moved_unchanged": return "#CE93D8";
+            case "none": return "#CE93D8";
+        }
+    }
+
+    let right_actions = [
+            {type: "unchanged", left:1, right:1},
+            {type: "added", left:-1, right:2},
+            {type: "unchanged", left:3, right:3},
+            {type: "unchanged", left:4, right:4},
+            {type: "added", left:-1, right:5},
+            {type: "unchanged", left:6, right:6},
+            {type: "unchanged", left:7, right:7},
+            {type: "unchanged", left:8, right:8},
+            {type: "unchanged", left:9, right:9},
+            {type: "unchanged", left:10, right:10},
+            {type: "unchanged", left:11, right:11},
+            {type: "unchanged", left:12, right:12},
+            {type: "unchanged", left:13, right:13},
+            {type: "unchanged", left:14, right:14},
+            {type: "unchanged", left:15, right:15},
+            {type: "unchanged", left:16, right:16},
+            {type: "unchanged", left:17, right:17},
+            {type: "unchanged", left:18, right:18},
+            {type: "unchanged", left:19, right:19},
+            {type: "unchanged", left:20, right:20},
+            {type: "unchanged", left:21, right:21},
+            {type: "unchanged", left:22, right:22},
+            {type: "unchanged", left:23, right:23},
+            {type: "unchanged", left:24, right:24},
+            {type: "unchanged", left:25, right:25},
+            {type: "unchanged", left:26, right:26},
+            {type: "unchanged", left:27, right:27},
+            {type: "unchanged", left:28, right:28},
+            {type: "unchanged", left:29, right:29},
+            {type: "unchanged", left:30, right:30},
+            {type: "unchanged", left:31, right:31},
+            {type: "unchanged", left:32, right:32},
+            {type: "unchanged", left:33, right:33},
+            {type: "unchanged", left:34, right:34},
+            {type: "unchanged", left:35, right:35},
+            {type: "unchanged", left:36, right:36},
+            {type: "unchanged", left:37, right:37},
+            {type: "unchanged", left:38, right:38},
+            {type: "unchanged", left:39, right:39},
+            {type: "unchanged", left:40, right:40},
+            {type: "unchanged", left:41, right:41},
+            {type: "unchanged", left:42, right:42},
+            {type: "unchanged", left:43, right:43},
+            {type: "unchanged", left:44, right:44},
+            {type: "unchanged", left:45, right:45},
+            {type: "unchanged", left:46, right:46},
+            {type: "unchanged", left:47, right:47},
+            {type: "added", left:-1, right:48},
+            {type: "added", left:-1, right:49},
+            {type: "added", left:-1, right:50},
+            {type: "unchanged", left:50, right:51},
+            {type: "added", left:-1, right:52},
+            {type: "unchanged", left:52, right:53},
+            {type: "unchanged", left:53, right:54},
+            {type: "added", left:-1, right:55},
+            {type: "unchanged", left:55, right:56},
+            {type: "unchanged", left:56, right:57},
+            {type: "unchanged", left:57, right:58},
+            {type: "unchanged", left:58, right:59},
+            {type: "unchanged", left:59, right:60},
+            {type: "unchanged", left:60, right:61},
+            {type: "unchanged", left:61, right:62},
+            {type: "unchanged", left:174, right:63},
+    ]
+
+	// setup the folds between the "added" hunks
+	let folds = [];
+	for (let i = 1; i < right_actions.length; ++i) {
+		if (right_actions[i-1].type != "added" && right_actions[i].type == "added") {
+			let j = 1;
+			while (i-j >= 0 && right_actions[i-j].type != "added") { ++j; }
+			if (j > 6) {  // we keep a window of 3 lines arounds the "added" hunks
+				folds.push({start: i-j+5, end: i-3});
+			}
+		}
+	}
+	// in case there is non "added" lines after the last added line
+	let last_green = right_actions.length - 1;
+	while (right_actions[last_green].type != "added") { --last_green; }
+	if (last_green < right_actions.length - 4) {
+		folds.push({start: last_green + 5, end: right_actions.length});
+	}
+
+    require.config({paths: {'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'}});
+    require(['vs/editor/editor.main'], function () {
+        monaco.languages.register({
+            id: "cidiff",
+        })
+
+        monaco.languages.registerFoldingRangeProvider("cidiff", {
+            provideFoldingRanges: (model, context, token) => folds
+        })
+        let rightEditor = monaco.editor.create(document.getElementById('right'), {
+            value: ciDiff.right.join('\n'),
+            minimap: {enabled: false},
+            readOnly: true,
+            scrollBeyondLastLine: false,
+            language: "cidiff",
+            automaticLayout: true,
+            //wordWrap: "on"
+        });
+        rightEditor.trigger('fold', 'editor.foldAll')
+
+        function ranges(l, r, type) {
+            let sl = ciDiff.left[l].split(/\s/);
+            let sr = ciDiff.right[r].split(/\s/);
+            let x = 0;
+            let j = 0;
+            let arr = [];
+            for (let i = 0; i < sl.length; ++i) {
+                if (sl[i] == "") {
+                    ++x;
+                    continue;
+                }
+                if (sr[j] == "") {
+                    --i;
+                    ++j;
+                    continue;
+                }
+                if (sl[i] != sr[j]) {
+                    arr.push({
+                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sl[i].length),
+                        options: {isWholeLine: false, className: type, overviewRuler: {color: getColor(type)}}
+                    });
+                }
+                x += sl[i].length + 1;
+                ++j;
+            }
+            return arr;
+        }
+
+        function mapToDecorations(actions) {
+            return actions.flatMap((a, i) => {
+                let arr = []
+                if (a.type == "unchanged") {
+                    return arr;
+                }
+                if (a.type.includes("updated")) {
+                    if (a.type == "moved_updated") {
+                        arr.push({
+                            range: new monaco.Range(i + 1, 1, i + 1, 1),
+                            options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                        });
+                    }
+                    //let tmp = ranges(i, left_actions[i].line-1, a.type);
+                    //console.log(i, left_actions[i].line-1, tmp);
+                    arr.push(...ranges(actions[i].left - 1, actions[i].right - 1, a.type));
+                } else {
+                    arr.push({
+                        range: new monaco.Range(i + 1, 1, i + 1, 1),
+                        options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                    });
+                }
+                return arr;
+            })
+        }
+
+        let rightDecorations = rightEditor.createDecorationsCollection(mapToDecorations(right_actions));
+
+    });
+</script>
+</body>
+
+</html>

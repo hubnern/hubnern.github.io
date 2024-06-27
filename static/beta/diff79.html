@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .column {
+            width: 100%;
+            height: 100%;
+        }
+
+        .updated {
+            background-color: #FFF59D;
+        }
+
+        .added {
+            background-color: #A5D6A7;
+        }
+
+        .deleted {
+            background-color: #EF9A9A;
+        }
+
+        .moved_updated, .moved_unchanged {
+            background-color: #CE93D8;
+        }
+
+        .none {
+            background-color: #64B5F6;
+        }
+
+        .selected {
+            color: #2196F3 !important;
+        }
+
+
+    </style>
+    <title>CiDiff</title>
+</head>
+
+<body>
+<div class='row'>
+    <div class='column' id='right'>
+    </div>
+</div>
+<script>
+    const ciDiff = {
+        left: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: kubernetes-sigs/external-dns/.github/workflows/lint.yaml@refs/heads/master",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 5 (hosted)",
+                "Current runner version: '2.311.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20231030.2.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20231030.2/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20231030.2",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.312.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Checks: write",
+                "Contents: read",
+                "Metadata: read",
+                "##[endgroup]",
+                "Secret source: Actions",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'actions/setup-go@v4' (SHA:93397bea11091df50f3d7e59dc26a7711a8bcfbe)",
+                "Download action repository 'actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11' (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)",
+                "Complete job name: Build",
+                "##[group]Run actions/setup-go@v4",
+                "with:",
+                "  go-version: 1.21",
+                "  check-latest: false",
+                "  token: ***",
+                "  cache: true",
+                "##[endgroup]",
+                "Setup go version spec 1.21",
+                "Found in cache @ /opt/hostedtoolcache/go/1.21.3/x64",
+                "Added go to the path",
+                "Successfully set up Go version 1.21",
+                "[command]/opt/hostedtoolcache/go/1.21.3/x64/bin/go env GOMODCACHE",
+                "[command]/opt/hostedtoolcache/go/1.21.3/x64/bin/go env GOCACHE",
+                "/home/runner/go/pkg/mod",
+                "/home/runner/.cache/go-build",
+                "##[warning]Restore cache failed: Dependencies file is not found in /home/runner/work/external-dns/external-dns. Supported file pattern: go.sum",
+                "go version go1.21.3 linux/amd64",
+                "",
+                "##[group]go env",
+                "GO111MODULE=''",
+                "GOARCH='amd64'",
+                "GOBIN=''",
+                "GOCACHE='/home/runner/.cache/go-build'",
+                "GOENV='/home/runner/.config/go/env'",
+                "GOEXE=''",
+                "GOEXPERIMENT=''",
+                "GOFLAGS=''",
+                "GOHOSTARCH='amd64'",
+                "GOHOSTOS='linux'",
+                "GOINSECURE=''",
+                "GOMODCACHE='/home/runner/go/pkg/mod'",
+                "GONOPROXY=''",
+                "GONOSUMDB=''",
+                "GOOS='linux'",
+                "GOPATH='/home/runner/go'",
+                "GOPRIVATE=''",
+                "GOPROXY='https://proxy.golang.org,direct'",
+                "GOROOT='/opt/hostedtoolcache/go/1.21.3/x64'",
+                "GOSUMDB='sum.golang.org'",
+                "GOTMPDIR=''",
+                "GOTOOLCHAIN='auto'",
+                "GOTOOLDIR='/opt/hostedtoolcache/go/1.21.3/x64/pkg/tool/linux_amd64'",
+                "GOVCS=''",
+                "GOVERSION='go1.21.3'",
+                "GCCGO='gccgo'",
+                "GOAMD64='v1'",
+                "AR='ar'",
+                "CC='gcc'",
+                "CXX='g++'",
+                "CGO_ENABLED='1'",
+                "GOMOD='/dev/null'",
+                "GOWORK=''",
+                "CGO_CFLAGS='-O2 -g'",
+                "CGO_CPPFLAGS=''",
+                "CGO_CXXFLAGS='-O2 -g'",
+                "CGO_FFLAGS='-O2 -g'",
+                "CGO_LDFLAGS='-O2 -g'",
+                "PKG_CONFIG='pkg-config'",
+                "GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build3193484247=/tmp/go-build -gno-record-gcc-switches'",
+                "",
+                "##[endgroup]",
+                "##[group]Run actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+                "with:",
+                "  repository: kubernetes-sigs/external-dns",
+                "  token: ***",
+                "  ssh-strict: true",
+                "  persist-credentials: true",
+                "  clean: true",
+                "  sparse-checkout-cone-mode: true",
+                "  fetch-depth: 1",
+                "  fetch-tags: false",
+                "  show-progress: true",
+                "  lfs: false",
+                "  submodules: false",
+                "  set-safe-directory: true",
+                "##[endgroup]",
+                "Syncing repository: kubernetes-sigs/external-dns",
+                "##[group]Getting Git version info",
+                "Working directory is '/home/runner/work/external-dns/external-dns'",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "##[endgroup]",
+                "Temporarily overriding HOME='/home/runner/work/_temp/c833e555-c5d2-4b9b-a20b-6a3ee6c7d298' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/external-dns/external-dns",
+                "Deleting the contents of '/home/runner/work/external-dns/external-dns'",
+                "##[group]Initializing the repository",
+                "[command]/usr/bin/git init /home/runner/work/external-dns/external-dns",
+                "hint: Using 'master' as the name for the initial branch. This default branch name",
+                "hint: is subject to change. To configure the initial branch name to use in all",
+                "hint: of your new repositories, which will suppress this warning, call:",
+                "hint: ",
+                "hint: 	git config --global init.defaultBranch <name>",
+                "hint: ",
+                "hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and",
+                "hint: 'development'. The just-created branch can be renamed via this command:",
+                "hint: ",
+                "hint: 	git branch -m <name>",
+                "Initialized empty Git repository in /home/runner/work/external-dns/external-dns/.git/",
+                "[command]/usr/bin/git remote add origin https://github.com/kubernetes-sigs/external-dns",
+                "##[endgroup]",
+                "##[group]Disabling automatic garbage collection",
+                "[command]/usr/bin/git config --local gc.auto 0",
+                "##[endgroup]",
+                "##[group]Setting up auth",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+                "##[endgroup]",
+                "##[group]Fetching the repository",
+                "[command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +438d06f3c45cf66d08945ae18d17e29c540d5c96:refs/remotes/origin/master",
+                "From https://github.com/kubernetes-sigs/external-dns",
+                " * [new ref]         438d06f3c45cf66d08945ae18d17e29c540d5c96 -> origin/master",
+                "##[endgroup]",
+                "##[group]Determining the checkout info",
+                "##[endgroup]",
+                "##[group]Checking out the ref",
+                "[command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master",
+                "Reset branch 'master'",
+                "branch 'master' set up to track 'origin/master'.",
+                "##[endgroup]",
+                "[command]/usr/bin/git log -1 --format='%H'",
+                "'438d06f3c45cf66d08945ae18d17e29c540d5c96'",
+                "##[group]Run curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.53.3",
+                "curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.53.3",
+                "make lint",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "golangci/golangci-lint info checking GitHub for tag 'v1.53.3'",
+                "golangci/golangci-lint info found version: 1.53.3 for v1.53.3/linux/amd64",
+                "golangci/golangci-lint info installed /home/runner/go/bin/golangci-lint",
+                ">> checking license header",
+                "golangci-lint run --timeout=30m ./...",
+                "Post job cleanup.",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "Temporarily overriding HOME='/home/runner/work/_temp/2363d2e7-af56-497a-b8bc-fcf0b5b90b08' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/external-dns/external-dns",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "http.https://github.com/.extraheader",
+                "[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "Post job cleanup.",
+                "[command]/opt/hostedtoolcache/go/1.21.3/x64/bin/go env GOMODCACHE",
+                "[command]/opt/hostedtoolcache/go/1.21.3/x64/bin/go env GOCACHE",
+                "/home/runner/go/pkg/mod",
+                "/home/runner/.cache/go-build",
+                "Primary key was not generated. Please check the log messages above for more errors or information",
+                "Cleaning up orphan processes",
+
+        ],
+        right: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: kubernetes-sigs/external-dns/.github/workflows/lint.yaml@refs/pull/4039/merge",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 7 (hosted)",
+                "Current runner version: '2.311.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20231030.2.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20231030.2/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20231030.2",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.312.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Checks: read",
+                "Contents: read",
+                "Metadata: read",
+                "##[endgroup]",
+                "Secret source: None",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'actions/setup-go@v4' (SHA:93397bea11091df50f3d7e59dc26a7711a8bcfbe)",
+                "Download action repository 'actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11' (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)",
+                "Complete job name: Build",
+                "##[group]Run actions/setup-go@v4",
+                "with:",
+                "  go-version: 1.21",
+                "  check-latest: false",
+                "  token: ***",
+                "  cache: true",
+                "##[endgroup]",
+                "Setup go version spec 1.21",
+                "Found in cache @ /opt/hostedtoolcache/go/1.21.3/x64",
+                "Added go to the path",
+                "Successfully set up Go version 1.21",
+                "[command]/opt/hostedtoolcache/go/1.21.3/x64/bin/go env GOMODCACHE",
+                "[command]/opt/hostedtoolcache/go/1.21.3/x64/bin/go env GOCACHE",
+                "/home/runner/go/pkg/mod",
+                "/home/runner/.cache/go-build",
+                "##[warning]Restore cache failed: Dependencies file is not found in /home/runner/work/external-dns/external-dns. Supported file pattern: go.sum",
+                "go version go1.21.3 linux/amd64",
+                "",
+                "##[group]go env",
+                "GO111MODULE=''",
+                "GOARCH='amd64'",
+                "GOBIN=''",
+                "GOCACHE='/home/runner/.cache/go-build'",
+                "GOENV='/home/runner/.config/go/env'",
+                "GOEXE=''",
+                "GOEXPERIMENT=''",
+                "GOFLAGS=''",
+                "GOHOSTARCH='amd64'",
+                "GOHOSTOS='linux'",
+                "GOINSECURE=''",
+                "GOMODCACHE='/home/runner/go/pkg/mod'",
+                "GONOPROXY=''",
+                "GONOSUMDB=''",
+                "GOOS='linux'",
+                "GOPATH='/home/runner/go'",
+                "GOPRIVATE=''",
+                "GOPROXY='https://proxy.golang.org,direct'",
+                "GOROOT='/opt/hostedtoolcache/go/1.21.3/x64'",
+                "GOSUMDB='sum.golang.org'",
+                "GOTMPDIR=''",
+                "GOTOOLCHAIN='auto'",
+                "GOTOOLDIR='/opt/hostedtoolcache/go/1.21.3/x64/pkg/tool/linux_amd64'",
+                "GOVCS=''",
+                "GOVERSION='go1.21.3'",
+                "GCCGO='gccgo'",
+                "GOAMD64='v1'",
+                "AR='ar'",
+                "CC='gcc'",
+                "CXX='g++'",
+                "CGO_ENABLED='1'",
+                "GOMOD='/dev/null'",
+                "GOWORK=''",
+                "CGO_CFLAGS='-O2 -g'",
+                "CGO_CPPFLAGS=''",
+                "CGO_CXXFLAGS='-O2 -g'",
+                "CGO_FFLAGS='-O2 -g'",
+                "CGO_LDFLAGS='-O2 -g'",
+                "PKG_CONFIG='pkg-config'",
+                "GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build1283809164=/tmp/go-build -gno-record-gcc-switches'",
+                "",
+                "##[endgroup]",
+                "##[group]Run actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11",
+                "with:",
+                "  repository: kubernetes-sigs/external-dns",
+                "  token: ***",
+                "  ssh-strict: true",
+                "  persist-credentials: true",
+                "  clean: true",
+                "  sparse-checkout-cone-mode: true",
+                "  fetch-depth: 1",
+                "  fetch-tags: false",
+                "  show-progress: true",
+                "  lfs: false",
+                "  submodules: false",
+                "  set-safe-directory: true",
+                "##[endgroup]",
+                "Syncing repository: kubernetes-sigs/external-dns",
+                "##[group]Getting Git version info",
+                "Working directory is '/home/runner/work/external-dns/external-dns'",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "##[endgroup]",
+                "Temporarily overriding HOME='/home/runner/work/_temp/f82e2fa3-a742-44e0-957f-148e33ed504f' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/external-dns/external-dns",
+                "Deleting the contents of '/home/runner/work/external-dns/external-dns'",
+                "##[group]Initializing the repository",
+                "[command]/usr/bin/git init /home/runner/work/external-dns/external-dns",
+                "hint: Using 'master' as the name for the initial branch. This default branch name",
+                "hint: is subject to change. To configure the initial branch name to use in all",
+                "hint: of your new repositories, which will suppress this warning, call:",
+                "hint: ",
+                "hint: 	git config --global init.defaultBranch <name>",
+                "hint: ",
+                "hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and",
+                "hint: 'development'. The just-created branch can be renamed via this command:",
+                "hint: ",
+                "hint: 	git branch -m <name>",
+                "Initialized empty Git repository in /home/runner/work/external-dns/external-dns/.git/",
+                "[command]/usr/bin/git remote add origin https://github.com/kubernetes-sigs/external-dns",
+                "##[endgroup]",
+                "##[group]Disabling automatic garbage collection",
+                "[command]/usr/bin/git config --local gc.auto 0",
+                "##[endgroup]",
+                "##[group]Setting up auth",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+                "##[endgroup]",
+                "##[group]Fetching the repository",
+                "[command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d11c6355283e8e82b0677a40adfc4b8dbf955304:refs/remotes/pull/4039/merge",
+                "From https://github.com/kubernetes-sigs/external-dns",
+                " * [new ref]         d11c6355283e8e82b0677a40adfc4b8dbf955304 -> pull/4039/merge",
+                "##[endgroup]",
+                "##[group]Determining the checkout info",
+                "##[endgroup]",
+                "##[group]Checking out the ref",
+                "[command]/usr/bin/git checkout --progress --force refs/remotes/pull/4039/merge",
+                "Note: switching to 'refs/remotes/pull/4039/merge'.",
+                "",
+                "You are in 'detached HEAD' state. You can look around, make experimental",
+                "changes and commit them, and you can discard any commits you make in this",
+                "state without impacting any branches by switching back to a branch.",
+                "",
+                "If you want to create a new branch to retain commits you create, you may",
+                "do so (now or later) by using -c with the switch command. Example:",
+                "",
+                "  git switch -c <new-branch-name>",
+                "",
+                "Or undo this operation with:",
+                "",
+                "  git switch -",
+                "",
+                "Turn off this advice by setting config variable advice.detachedHead to false",
+                "",
+                "HEAD is now at d11c635 Merge 811b425672582113d59f41fb25188779b0bfdf41 into 438d06f3c45cf66d08945ae18d17e29c540d5c96",
+                "##[endgroup]",
+                "[command]/usr/bin/git log -1 --format='%H'",
+                "'d11c6355283e8e82b0677a40adfc4b8dbf955304'",
+                "##[group]Run curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.53.3",
+                "curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.53.3",
+                "make lint",
+                "shell: /usr/bin/bash -e {0}",
+                "##[endgroup]",
+                "golangci/golangci-lint info checking GitHub for tag 'v1.53.3'",
+                "golangci/golangci-lint info found version: 1.53.3 for v1.53.3/linux/amd64",
+                "golangci/golangci-lint info installed /home/runner/go/bin/golangci-lint",
+                ">> checking license header",
+                "golangci-lint run --timeout=30m ./...",
+                "##[error]main.go:77:2: could not import sigs.k8s.io/external-dns/provider/scaleway (-: # sigs.k8s.io/external-dns/provider/scaleway",
+                "##[error]provider/scaleway/scaleway.go:68:10: multiple-value scw.LoadConfig() (value of type (*scw.Config, error)) in single-value context) (typecheck)",
+                "	\"sigs.k8s.io/external-dns/provider/scaleway\"",
+                "	^",
+                "provider/scaleway/interface.go:1: : # sigs.k8s.io/external-dns/provider/scaleway [sigs.k8s.io/external-dns/provider/scaleway.test]",
+                "##[error]provider/scaleway/scaleway.go:68:10: multiple-value scw.LoadConfig() (value of type (*scw.Config, error)) in single-value context (typecheck)",
+                "/*",
+                "make: *** [Makefile:53: go-lint] Error 1",
+                "##[error]Process completed with exit code 2.",
+                "Post job cleanup.",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "Temporarily overriding HOME='/home/runner/work/_temp/471c9186-a368-4cca-a3b4-7124282c33d6' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/external-dns/external-dns",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "http.https://github.com/.extraheader",
+                "[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "Cleaning up orphan processes",
+
+        ],
+    };
+</script>
+<script>
+    function getColor(type) {
+        switch (type) {
+            case "updated": return "#FFF59D";
+            case "added": return "#A5D6A7";
+            case "deleted": return "#EF9A9A";
+            case "moved_updated":
+            case "moved_unchanged": return "#CE93D8";
+            case "none": return "#CE93D8";
+        }
+    }
+
+    let right_actions = [
+            {type: "unchanged", left:1, right:1},
+            {type: "added", left:-1, right:2},
+            {type: "unchanged", left:3, right:3},
+            {type: "unchanged", left:4, right:4},
+            {type: "added", left:-1, right:5},
+            {type: "unchanged", left:6, right:6},
+            {type: "unchanged", left:7, right:7},
+            {type: "unchanged", left:8, right:8},
+            {type: "unchanged", left:9, right:9},
+            {type: "unchanged", left:10, right:10},
+            {type: "unchanged", left:11, right:11},
+            {type: "unchanged", left:12, right:12},
+            {type: "unchanged", left:13, right:13},
+            {type: "unchanged", left:14, right:14},
+            {type: "unchanged", left:15, right:15},
+            {type: "unchanged", left:16, right:16},
+            {type: "unchanged", left:17, right:17},
+            {type: "unchanged", left:18, right:18},
+            {type: "unchanged", left:19, right:19},
+            {type: "unchanged", left:20, right:20},
+            {type: "unchanged", left:21, right:21},
+            {type: "added", left:-1, right:22},
+            {type: "unchanged", left:23, right:23},
+            {type: "unchanged", left:24, right:24},
+            {type: "unchanged", left:25, right:25},
+            {type: "added", left:-1, right:26},
+            {type: "unchanged", left:27, right:27},
+            {type: "unchanged", left:28, right:28},
+            {type: "unchanged", left:29, right:29},
+            {type: "unchanged", left:30, right:30},
+            {type: "unchanged", left:31, right:31},
+            {type: "unchanged", left:32, right:32},
+            {type: "unchanged", left:33, right:33},
+            {type: "unchanged", left:34, right:34},
+            {type: "unchanged", left:35, right:35},
+            {type: "unchanged", left:36, right:36},
+            {type: "unchanged", left:37, right:37},
+            {type: "unchanged", left:38, right:38},
+            {type: "unchanged", left:39, right:39},
+            {type: "unchanged", left:40, right:40},
+            {type: "unchanged", left:41, right:41},
+            {type: "unchanged", left:42, right:42},
+            {type: "unchanged", left:43, right:43},
+            {type: "unchanged", left:44, right:44},
+            {type: "unchanged", left:45, right:45},
+            {type: "unchanged", left:46, right:46},
+            {type: "unchanged", left:47, right:47},
+            {type: "unchanged", left:48, right:48},
+            {type: "unchanged", left:49, right:49},
+            {type: "unchanged", left:50, right:50},
+            {type: "unchanged", left:51, right:51},
+            {type: "unchanged", left:52, right:52},
+            {type: "unchanged", left:53, right:53},
+            {type: "unchanged", left:54, right:54},
+            {type: "unchanged", left:55, right:55},
+            {type: "unchanged", left:56, right:56},
+            {type: "unchanged", left:57, right:57},
+            {type: "unchanged", left:58, right:58},
+            {type: "unchanged", left:59, right:59},
+            {type: "unchanged", left:60, right:60},
+            {type: "unchanged", left:61, right:61},
+            {type: "unchanged", left:62, right:62},
+            {type: "unchanged", left:63, right:63},
+            {type: "unchanged", left:64, right:64},
+            {type: "unchanged", left:65, right:65},
+            {type: "unchanged", left:66, right:66},
+            {type: "unchanged", left:67, right:67},
+            {type: "unchanged", left:68, right:68},
+            {type: "unchanged", left:69, right:69},
+            {type: "unchanged", left:70, right:70},
+            {type: "unchanged", left:71, right:71},
+            {type: "unchanged", left:72, right:72},
+            {type: "unchanged", left:73, right:73},
+            {type: "unchanged", left:74, right:74},
+            {type: "unchanged", left:75, right:75},
+            {type: "unchanged", left:76, right:76},
+            {type: "unchanged", left:77, right:77},
+            {type: "unchanged", left:78, right:78},
+            {type: "unchanged", left:79, right:79},
+            {type: "unchanged", left:80, right:80},
+            {type: "unchanged", left:81, right:81},
+            {type: "unchanged", left:82, right:82},
+            {type: "unchanged", left:83, right:83},
+            {type: "unchanged", left:84, right:84},
+            {type: "unchanged", left:85, right:85},
+            {type: "unchanged", left:86, right:86},
+            {type: "unchanged", left:87, right:87},
+            {type: "unchanged", left:88, right:88},
+            {type: "unchanged", left:89, right:89},
+            {type: "unchanged", left:90, right:90},
+            {type: "added", left:-1, right:91},
+            {type: "unchanged", left:92, right:92},
+            {type: "unchanged", left:93, right:93},
+            {type: "unchanged", left:94, right:94},
+            {type: "unchanged", left:95, right:95},
+            {type: "unchanged", left:96, right:96},
+            {type: "unchanged", left:97, right:97},
+            {type: "unchanged", left:98, right:98},
+            {type: "unchanged", left:99, right:99},
+            {type: "unchanged", left:100, right:100},
+            {type: "unchanged", left:101, right:101},
+            {type: "unchanged", left:102, right:102},
+            {type: "unchanged", left:103, right:103},
+            {type: "unchanged", left:104, right:104},
+            {type: "unchanged", left:105, right:105},
+            {type: "unchanged", left:106, right:106},
+            {type: "unchanged", left:107, right:107},
+            {type: "unchanged", left:108, right:108},
+            {type: "unchanged", left:109, right:109},
+            {type: "unchanged", left:110, right:110},
+            {type: "unchanged", left:111, right:111},
+            {type: "unchanged", left:112, right:112},
+            {type: "unchanged", left:113, right:113},
+            {type: "unchanged", left:114, right:114},
+            {type: "added", left:-1, right:115},
+            {type: "unchanged", left:116, right:116},
+            {type: "unchanged", left:117, right:117},
+            {type: "unchanged", left:118, right:118},
+            {type: "unchanged", left:119, right:119},
+            {type: "unchanged", left:120, right:120},
+            {type: "unchanged", left:121, right:121},
+            {type: "unchanged", left:122, right:122},
+            {type: "unchanged", left:123, right:123},
+            {type: "unchanged", left:124, right:124},
+            {type: "unchanged", left:125, right:125},
+            {type: "unchanged", left:126, right:126},
+            {type: "unchanged", left:127, right:127},
+            {type: "unchanged", left:128, right:128},
+            {type: "unchanged", left:129, right:129},
+            {type: "unchanged", left:130, right:130},
+            {type: "unchanged", left:131, right:131},
+            {type: "unchanged", left:132, right:132},
+            {type: "unchanged", left:133, right:133},
+            {type: "unchanged", left:134, right:134},
+            {type: "unchanged", left:135, right:135},
+            {type: "unchanged", left:136, right:136},
+            {type: "unchanged", left:137, right:137},
+            {type: "unchanged", left:138, right:138},
+            {type: "unchanged", left:139, right:139},
+            {type: "unchanged", left:140, right:140},
+            {type: "unchanged", left:141, right:141},
+            {type: "unchanged", left:142, right:142},
+            {type: "unchanged", left:143, right:143},
+            {type: "unchanged", left:144, right:144},
+            {type: "added", left:-1, right:145},
+            {type: "unchanged", left:146, right:146},
+            {type: "added", left:-1, right:147},
+            {type: "unchanged", left:148, right:148},
+            {type: "unchanged", left:149, right:149},
+            {type: "unchanged", left:150, right:150},
+            {type: "unchanged", left:151, right:151},
+            {type: "added", left:-1, right:152},
+            {type: "added", left:-1, right:153},
+            {type: "added", left:-1, right:154},
+            {type: "added", left:-1, right:155},
+            {type: "added", left:-1, right:156},
+            {type: "added", left:-1, right:157},
+            {type: "added", left:-1, right:158},
+            {type: "added", left:-1, right:159},
+            {type: "added", left:-1, right:160},
+            {type: "added", left:-1, right:161},
+            {type: "added", left:-1, right:162},
+            {type: "added", left:-1, right:163},
+            {type: "added", left:-1, right:164},
+            {type: "added", left:-1, right:165},
+            {type: "added", left:-1, right:166},
+            {type: "added", left:-1, right:167},
+            {type: "added", left:-1, right:168},
+            {type: "added", left:-1, right:169},
+            {type: "added", left:-1, right:170},
+            {type: "unchanged", left:155, right:171},
+            {type: "unchanged", left:156, right:172},
+            {type: "added", left:-1, right:173},
+            {type: "unchanged", left:158, right:174},
+            {type: "unchanged", left:159, right:175},
+            {type: "unchanged", left:160, right:176},
+            {type: "unchanged", left:161, right:177},
+            {type: "unchanged", left:162, right:178},
+            {type: "unchanged", left:163, right:179},
+            {type: "unchanged", left:164, right:180},
+            {type: "unchanged", left:165, right:181},
+            {type: "unchanged", left:166, right:182},
+            {type: "unchanged", left:167, right:183},
+            {type: "added", left:-1, right:184},
+            {type: "added", left:-1, right:185},
+            {type: "added", left:-1, right:186},
+            {type: "added", left:-1, right:187},
+            {type: "added", left:-1, right:188},
+            {type: "added", left:-1, right:189},
+            {type: "added", left:-1, right:190},
+            {type: "added", left:-1, right:191},
+            {type: "added", left:-1, right:192},
+            {type: "unchanged", left:168, right:193},
+            {type: "unchanged", left:169, right:194},
+            {type: "unchanged", left:170, right:195},
+            {type: "added", left:-1, right:196},
+            {type: "unchanged", left:172, right:197},
+            {type: "unchanged", left:173, right:198},
+            {type: "unchanged", left:174, right:199},
+            {type: "unchanged", left:175, right:200},
+            {type: "unchanged", left:176, right:201},
+            {type: "unchanged", left:177, right:202},
+            {type: "unchanged", left:178, right:203},
+            {type: "unchanged", left:179, right:204},
+            {type: "unchanged", left:186, right:205},
+    ]
+
+	// setup the folds between the "added" hunks
+	let folds = [];
+	for (let i = 1; i < right_actions.length; ++i) {
+		if (right_actions[i-1].type != "added" && right_actions[i].type == "added") {
+			let j = 1;
+			while (i-j >= 0 && right_actions[i-j].type != "added") { ++j; }
+			if (j > 6) {  // we keep a window of 3 lines arounds the "added" hunks
+				folds.push({start: i-j+5, end: i-3});
+			}
+		}
+	}
+	// in case there is non "added" lines after the last added line
+	let last_green = right_actions.length - 1;
+	while (right_actions[last_green].type != "added") { --last_green; }
+	if (last_green < right_actions.length - 4) {
+		folds.push({start: last_green + 5, end: right_actions.length});
+	}
+
+    require.config({paths: {'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'}});
+    require(['vs/editor/editor.main'], function () {
+        monaco.languages.register({
+            id: "cidiff",
+        })
+
+        monaco.languages.registerFoldingRangeProvider("cidiff", {
+            provideFoldingRanges: (model, context, token) => folds
+        })
+        let rightEditor = monaco.editor.create(document.getElementById('right'), {
+            value: ciDiff.right.join('\n'),
+            minimap: {enabled: false},
+            readOnly: true,
+            scrollBeyondLastLine: false,
+            language: "cidiff",
+            automaticLayout: true,
+            //wordWrap: "on"
+        });
+        rightEditor.trigger('fold', 'editor.foldAll')
+
+        function ranges(l, r, type) {
+            let sl = ciDiff.left[l].split(/\s/);
+            let sr = ciDiff.right[r].split(/\s/);
+            let x = 0;
+            let j = 0;
+            let arr = [];
+            for (let i = 0; i < sl.length; ++i) {
+                if (sl[i] == "") {
+                    ++x;
+                    continue;
+                }
+                if (sr[j] == "") {
+                    --i;
+                    ++j;
+                    continue;
+                }
+                if (sl[i] != sr[j]) {
+                    arr.push({
+                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sl[i].length),
+                        options: {isWholeLine: false, className: type, overviewRuler: {color: getColor(type)}}
+                    });
+                }
+                x += sl[i].length + 1;
+                ++j;
+            }
+            return arr;
+        }
+
+        function mapToDecorations(actions) {
+            return actions.flatMap((a, i) => {
+                let arr = []
+                if (a.type == "unchanged") {
+                    return arr;
+                }
+                if (a.type.includes("updated")) {
+                    if (a.type == "moved_updated") {
+                        arr.push({
+                            range: new monaco.Range(i + 1, 1, i + 1, 1),
+                            options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                        });
+                    }
+                    //let tmp = ranges(i, left_actions[i].line-1, a.type);
+                    //console.log(i, left_actions[i].line-1, tmp);
+                    arr.push(...ranges(actions[i].left - 1, actions[i].right - 1, a.type));
+                } else {
+                    arr.push({
+                        range: new monaco.Range(i + 1, 1, i + 1, 1),
+                        options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                    });
+                }
+                return arr;
+            })
+        }
+
+        let rightDecorations = rightEditor.createDecorationsCollection(mapToDecorations(right_actions));
+
+    });
+</script>
+</body>
+
+</html>

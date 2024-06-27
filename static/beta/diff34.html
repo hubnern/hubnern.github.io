@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/editor/editor.main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs/loader.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .column {
+            width: 100%;
+            height: 100%;
+        }
+
+        .updated {
+            background-color: #FFF59D;
+        }
+
+        .added {
+            background-color: #A5D6A7;
+        }
+
+        .deleted {
+            background-color: #EF9A9A;
+        }
+
+        .moved_updated, .moved_unchanged {
+            background-color: #CE93D8;
+        }
+
+        .none {
+            background-color: #64B5F6;
+        }
+
+        .selected {
+            color: #2196F3 !important;
+        }
+
+
+    </style>
+    <title>CiDiff</title>
+</head>
+
+<body>
+<div class='row'>
+    <div class='column' id='right'>
+    </div>
+</div>
+<script>
+    const ciDiff = {
+        left: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: avdeev/vanilla-sharing/.github/workflows/nodejs.yml@refs/heads/dependabot/npm_and_yarn/types/node-20.8.10",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 2 (hosted)",
+                "Current runner version: '2.311.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20231030.2.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20231030.2/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20231030.2",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.312.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Actions: read",
+                "Checks: read",
+                "Contents: read",
+                "Deployments: read",
+                "Discussions: read",
+                "Issues: read",
+                "Metadata: read",
+                "Packages: read",
+                "Pages: read",
+                "PullRequests: read",
+                "RepositoryProjects: read",
+                "SecurityEvents: read",
+                "Statuses: read",
+                "##[endgroup]",
+                "Secret source: Dependabot",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'actions/checkout@v4' (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)",
+                "Download action repository 'actions/setup-node@v3' (SHA:1a4442cacd436585916779262731d5b162bc6ec7)",
+                "Download action repository 'coverallsapp/github-action@master' (SHA:09b709cf6a16e30b0808ba050c7a6e8a5ef13f8d)",
+                "Complete job name: build (20.x)",
+                "##[group]Run actions/checkout@v4",
+                "with:",
+                "  repository: avdeev/vanilla-sharing",
+                "  token: ***",
+                "  ssh-strict: true",
+                "  persist-credentials: true",
+                "  clean: true",
+                "  sparse-checkout-cone-mode: true",
+                "  fetch-depth: 1",
+                "  fetch-tags: false",
+                "  show-progress: true",
+                "  lfs: false",
+                "  submodules: false",
+                "  set-safe-directory: true",
+                "##[endgroup]",
+                "Syncing repository: avdeev/vanilla-sharing",
+                "##[group]Getting Git version info",
+                "Working directory is '/home/runner/work/vanilla-sharing/vanilla-sharing'",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "##[endgroup]",
+                "Temporarily overriding HOME='/home/runner/work/_temp/fb8d7b6f-5d73-4f72-bf5d-e4ba4d060261' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/vanilla-sharing/vanilla-sharing",
+                "Deleting the contents of '/home/runner/work/vanilla-sharing/vanilla-sharing'",
+                "##[group]Initializing the repository",
+                "[command]/usr/bin/git init /home/runner/work/vanilla-sharing/vanilla-sharing",
+                "hint: Using 'master' as the name for the initial branch. This default branch name",
+                "hint: is subject to change. To configure the initial branch name to use in all",
+                "hint: of your new repositories, which will suppress this warning, call:",
+                "hint: ",
+                "hint: 	git config --global init.defaultBranch <name>",
+                "hint: ",
+                "hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and",
+                "hint: 'development'. The just-created branch can be renamed via this command:",
+                "hint: ",
+                "hint: 	git branch -m <name>",
+                "Initialized empty Git repository in /home/runner/work/vanilla-sharing/vanilla-sharing/.git/",
+                "[command]/usr/bin/git remote add origin https://github.com/avdeev/vanilla-sharing",
+                "##[endgroup]",
+                "##[group]Disabling automatic garbage collection",
+                "[command]/usr/bin/git config --local gc.auto 0",
+                "##[endgroup]",
+                "##[group]Setting up auth",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+                "##[endgroup]",
+                "##[group]Fetching the repository",
+                "[command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1d0eabef14aa97a07b453f893789794af1b322e5:refs/remotes/origin/dependabot/npm_and_yarn/types/node-20.8.10",
+                "From https://github.com/avdeev/vanilla-sharing",
+                " * [new ref]         1d0eabef14aa97a07b453f893789794af1b322e5 -> origin/dependabot/npm_and_yarn/types/node-20.8.10",
+                "##[endgroup]",
+                "##[group]Determining the checkout info",
+                "##[endgroup]",
+                "##[group]Checking out the ref",
+                "[command]/usr/bin/git checkout --progress --force -B dependabot/npm_and_yarn/types/node-20.8.10 refs/remotes/origin/dependabot/npm_and_yarn/types/node-20.8.10",
+                "Switched to a new branch 'dependabot/npm_and_yarn/types/node-20.8.10'",
+                "branch 'dependabot/npm_and_yarn/types/node-20.8.10' set up to track 'origin/dependabot/npm_and_yarn/types/node-20.8.10'.",
+                "##[endgroup]",
+                "[command]/usr/bin/git log -1 --format='%H'",
+                "'1d0eabef14aa97a07b453f893789794af1b322e5'",
+                "##[group]Run actions/setup-node@v3",
+                "with:",
+                "  node-version: 20.x",
+                "  always-auth: false",
+                "  check-latest: false",
+                "  token: ***",
+                "##[endgroup]",
+                "Found in cache @ /opt/hostedtoolcache/node/20.9.0/x64",
+                "##[group]Environment details",
+                "node: v20.9.0",
+                "npm: 10.1.0",
+                "yarn: 1.22.19",
+                "##[endgroup]",
+                "##[group]Run npm ci",
+                "npm ci",
+                "npm test",
+                "shell: /usr/bin/bash -e {0}",
+                "env:",
+                "  CI: true",
+                "##[endgroup]",
+                "",
+                "> vanilla-sharing@6.1.2 prepare",
+                "> husky install",
+                "",
+                "husky - Git hooks installed",
+                "",
+                "added 847 packages, and audited 848 packages in 17s",
+                "",
+                "143 packages are looking for funding",
+                "  run `npm fund` for details",
+                "",
+                "found 0 vulnerabilities",
+                "",
+                "> vanilla-sharing@6.1.2 test",
+                "> npm run lint && npm run typing-tests && npm run build && npm run size && jest --coverage",
+                "",
+                "",
+                "> vanilla-sharing@6.1.2 lint",
+                "> eslint --ignore-path .gitignore .",
+                "",
+                "",
+                "> vanilla-sharing@6.1.2 typing-tests",
+                "> tsc --project typing-tests",
+                "",
+                "",
+                "> vanilla-sharing@6.1.2 build",
+                "> rollup -c",
+                "",
+                "(node:1961) ExperimentalWarning: Import assertions are not a stable feature of the JavaScript language. Avoid relying on their current behavior and syntax as those might change in a future version of Node.js.",
+                "(Use `node --trace-warnings ...` to show where the warning was created)",
+                "(node:1961) ExperimentalWarning: Importing JSON modules is an experimental feature and might change at any time",
+                "",
+                "src/main.js → ./dist/vanilla-sharing.umd.js, ./dist/vanilla-sharing.esm.js...",
+                "created ./dist/vanilla-sharing.umd.js, ./dist/vanilla-sharing.esm.js in 959ms",
+                "",
+                "> vanilla-sharing@6.1.2 size",
+                "> size-limit",
+                "",
+                "- Adding to empty esbuild project",
+                "✔ Adding to empty esbuild project",
+                "  ",
+                "  dist/vanilla-sharing.umd.js",
+                "  Size limit: 2.1 kB",
+                "  Size:       2.07 kB with all dependencies, minified and gzipped",
+                "  ",
+                "  dist/vanilla-sharing.esm.js",
+                "  Size limit: 1.5 kB",
+                "  Size:       1.46 kB with all dependencies, minified and gzipped",
+                "  ",
+                "PASS src/sharers/tests/email.test.js",
+                "PASS src/sharers/tests/mail.test.js",
+                "PASS src/sharers/tests/whatsapp.test.js",
+                "PASS src/sharers/tests/fbShare.test.js",
+                "PASS src/sharers/tests/linkedin.test.js",
+                "PASS src/sharers/tests/viber.test.js",
+                "PASS src/sharers/tests/vk.test.js",
+                "PASS src/sharers/tests/ok.test.js",
+                "PASS src/sharers/tests/messenger.test.js",
+                "PASS src/utils/tests/mobileShare.test.js",
+                "PASS src/sharers/tests/fbFeed.test.js",
+                "PASS src/sharers/tests/telegram.test.js",
+                "PASS src/sharers/tests/tw.test.js",
+                "PASS src/sharers/tests/line.test.js",
+                "PASS src/utils/tests/isMobileSafari.test.js",
+                "PASS src/sharers/tests/tumblr.test.js",
+                "PASS src/sharers/tests/fbbutton.test.js",
+                "PASS src/sharers/tests/pinterest.test.js",
+                "PASS src/sharers/tests/reddit.test.js",
+                "--------------------|---------|----------|---------|---------|-------------------",
+                "File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s ",
+                "--------------------|---------|----------|---------|---------|-------------------",
+                "All files           |     100 |    85.29 |     100 |     100 |                   ",
+                " src                |     100 |      100 |     100 |     100 |                   ",
+                "  config.js         |     100 |      100 |     100 |     100 |                   ",
+                " src/sharers        |     100 |    84.37 |     100 |     100 |                   ",
+                "  email.js          |     100 |       90 |     100 |     100 | 3                 ",
+                "  fbButton.js       |     100 |       75 |     100 |     100 | 4                 ",
+                "  fbFeed.js         |     100 |       75 |     100 |     100 | 4                 ",
+                "  fbShare.js        |     100 |       75 |     100 |     100 | 4                 ",
+                "  line.js           |     100 |      100 |     100 |     100 |                   ",
+                "  linkedin.js       |     100 |      100 |     100 |     100 |                   ",
+                "  mail.js           |     100 |      100 |     100 |     100 |                   ",
+                "  messenger.js      |     100 |      100 |     100 |     100 |                   ",
+                "  ok.js             |     100 |       50 |     100 |     100 | 4                 ",
+                "  pinterest.js      |     100 |      100 |     100 |     100 |                   ",
+                "  reddit.js         |     100 |      100 |     100 |     100 |                   ",
+                "  telegram.js       |     100 |       50 |     100 |     100 | 4                 ",
+                "  tumblr.js         |     100 |      100 |     100 |     100 |                   ",
+                "  tw.js             |     100 |    66.66 |     100 |     100 | 4                 ",
+                "  viber.js          |     100 |    83.33 |     100 |     100 | 4                 ",
+                "  vk.js             |     100 |    91.66 |     100 |     100 | 6                 ",
+                "  whatsapp.js       |     100 |       50 |     100 |     100 | 4                 ",
+                " src/utils          |     100 |      100 |     100 |     100 |                   ",
+                "  encodeParams.js   |     100 |      100 |     100 |     100 |                   ",
+                "  isMobileSafari.js |     100 |      100 |     100 |     100 |                   ",
+                "  mobileShare.js    |     100 |      100 |     100 |     100 |                   ",
+                "--------------------|---------|----------|---------|---------|-------------------",
+                "",
+                "Test Suites: 19 passed, 19 total",
+                "Tests:       62 passed, 62 total",
+                "Snapshots:   0 total",
+                "Time:        27.707 s",
+                "Ran all test suites.",
+                "##[group]Run coverallsapp/github-action@master",
+                "with:",
+                "  github-token: ***",
+                "  path-to-lcov: ./coverage/lcov.info",
+                "  coveralls-endpoint: https://coveralls.io",
+                "  debug: false",
+                "##[endgroup]",
+                "Using lcov file: ./coverage/lcov.info",
+                "Post job cleanup.",
+                "Post job cleanup.",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "Temporarily overriding HOME='/home/runner/work/_temp/41c0353d-2773-42fa-b67c-e8ce14755ed8' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/vanilla-sharing/vanilla-sharing",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "http.https://github.com/.extraheader",
+                "[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "Cleaning up orphan processes",
+
+        ],
+        right: [
+                "Requested labels: ubuntu-latest",
+                "Job defined at: avdeev/vanilla-sharing/.github/workflows/nodejs.yml@refs/heads/dependabot/npm_and_yarn/rollup-4.3.0",
+                "Waiting for a runner to pick up this job...",
+                "Job is waiting for a hosted runner to come online.",
+                "Job is about to start running on the hosted runner: GitHub Actions 3 (hosted)",
+                "Current runner version: '2.311.0'",
+                "##[group]Operating System",
+                "Ubuntu",
+                "22.04.3",
+                "LTS",
+                "##[endgroup]",
+                "##[group]Runner Image",
+                "Image: ubuntu-22.04",
+                "Version: 20231030.2.0",
+                "Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20231030.2/images/linux/Ubuntu2204-Readme.md",
+                "Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20231030.2",
+                "##[endgroup]",
+                "##[group]Runner Image Provisioner",
+                "2.0.312.1",
+                "##[endgroup]",
+                "##[group]GITHUB_TOKEN Permissions",
+                "Actions: read",
+                "Checks: read",
+                "Contents: read",
+                "Deployments: read",
+                "Discussions: read",
+                "Issues: read",
+                "Metadata: read",
+                "Packages: read",
+                "Pages: read",
+                "PullRequests: read",
+                "RepositoryProjects: read",
+                "SecurityEvents: read",
+                "Statuses: read",
+                "##[endgroup]",
+                "Secret source: Dependabot",
+                "Prepare workflow directory",
+                "Prepare all required actions",
+                "Getting action download info",
+                "Download action repository 'actions/checkout@v4' (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)",
+                "Download action repository 'actions/setup-node@v3' (SHA:1a4442cacd436585916779262731d5b162bc6ec7)",
+                "Download action repository 'coverallsapp/github-action@master' (SHA:09b709cf6a16e30b0808ba050c7a6e8a5ef13f8d)",
+                "Complete job name: build (20.x)",
+                "##[group]Run actions/checkout@v4",
+                "with:",
+                "  repository: avdeev/vanilla-sharing",
+                "  token: ***",
+                "  ssh-strict: true",
+                "  persist-credentials: true",
+                "  clean: true",
+                "  sparse-checkout-cone-mode: true",
+                "  fetch-depth: 1",
+                "  fetch-tags: false",
+                "  show-progress: true",
+                "  lfs: false",
+                "  submodules: false",
+                "  set-safe-directory: true",
+                "##[endgroup]",
+                "Syncing repository: avdeev/vanilla-sharing",
+                "##[group]Getting Git version info",
+                "Working directory is '/home/runner/work/vanilla-sharing/vanilla-sharing'",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "##[endgroup]",
+                "Temporarily overriding HOME='/home/runner/work/_temp/a25f37ae-e87c-4c3f-8302-3ea34c329907' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/vanilla-sharing/vanilla-sharing",
+                "Deleting the contents of '/home/runner/work/vanilla-sharing/vanilla-sharing'",
+                "##[group]Initializing the repository",
+                "[command]/usr/bin/git init /home/runner/work/vanilla-sharing/vanilla-sharing",
+                "hint: Using 'master' as the name for the initial branch. This default branch name",
+                "hint: is subject to change. To configure the initial branch name to use in all",
+                "hint: of your new repositories, which will suppress this warning, call:",
+                "hint: ",
+                "hint: 	git config --global init.defaultBranch <name>",
+                "hint: ",
+                "hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and",
+                "hint: 'development'. The just-created branch can be renamed via this command:",
+                "hint: ",
+                "hint: 	git branch -m <name>",
+                "Initialized empty Git repository in /home/runner/work/vanilla-sharing/vanilla-sharing/.git/",
+                "[command]/usr/bin/git remote add origin https://github.com/avdeev/vanilla-sharing",
+                "##[endgroup]",
+                "##[group]Disabling automatic garbage collection",
+                "[command]/usr/bin/git config --local gc.auto 0",
+                "##[endgroup]",
+                "##[group]Setting up auth",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+                "##[endgroup]",
+                "##[group]Fetching the repository",
+                "[command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ef22aef720df53466346c8d21660ee460c171fb9:refs/remotes/origin/dependabot/npm_and_yarn/rollup-4.3.0",
+                "From https://github.com/avdeev/vanilla-sharing",
+                " * [new ref]         ef22aef720df53466346c8d21660ee460c171fb9 -> origin/dependabot/npm_and_yarn/rollup-4.3.0",
+                "##[endgroup]",
+                "##[group]Determining the checkout info",
+                "##[endgroup]",
+                "##[group]Checking out the ref",
+                "[command]/usr/bin/git checkout --progress --force -B dependabot/npm_and_yarn/rollup-4.3.0 refs/remotes/origin/dependabot/npm_and_yarn/rollup-4.3.0",
+                "Switched to a new branch 'dependabot/npm_and_yarn/rollup-4.3.0'",
+                "branch 'dependabot/npm_and_yarn/rollup-4.3.0' set up to track 'origin/dependabot/npm_and_yarn/rollup-4.3.0'.",
+                "##[endgroup]",
+                "[command]/usr/bin/git log -1 --format='%H'",
+                "'ef22aef720df53466346c8d21660ee460c171fb9'",
+                "##[group]Run actions/setup-node@v3",
+                "with:",
+                "  node-version: 20.x",
+                "  always-auth: false",
+                "  check-latest: false",
+                "  token: ***",
+                "##[endgroup]",
+                "Found in cache @ /opt/hostedtoolcache/node/20.9.0/x64",
+                "##[group]Environment details",
+                "node: v20.9.0",
+                "npm: 10.1.0",
+                "yarn: 1.22.19",
+                "##[endgroup]",
+                "##[group]Run npm ci",
+                "npm ci",
+                "npm test",
+                "shell: /usr/bin/bash -e {0}",
+                "env:",
+                "  CI: true",
+                "##[endgroup]",
+                "npm ERR! code ERESOLVE",
+                "npm ERR! ERESOLVE could not resolve",
+                "npm ERR! ",
+                "npm ERR! While resolving: @rollup/plugin-babel@6.0.3",
+                "npm ERR! Found: rollup@4.3.0",
+                "npm ERR! node_modules/rollup",
+                "npm ERR!   dev rollup@\"4.3.0\" from the root project",
+                "npm ERR!   peerOptional rollup@\"^1.20.0||^2.0.0||^3.0.0||^4.0.0\" from @rollup/pluginutils@5.0.5",
+                "npm ERR!   node_modules/@rollup/pluginutils",
+                "npm ERR!     @rollup/pluginutils@\"^5.0.1\" from @rollup/plugin-babel@6.0.3",
+                "npm ERR!     node_modules/@rollup/plugin-babel",
+                "npm ERR!       dev @rollup/plugin-babel@\"6.0.3\" from the root project",
+                "npm ERR! ",
+                "npm ERR! Could not resolve dependency:",
+                "npm ERR! peerOptional rollup@\"^1.20.0||^2.0.0||^3.0.0\" from @rollup/plugin-babel@6.0.3",
+                "npm ERR! node_modules/@rollup/plugin-babel",
+                "npm ERR!   dev @rollup/plugin-babel@\"6.0.3\" from the root project",
+                "npm ERR! ",
+                "npm ERR! Conflicting peer dependency: rollup@3.29.4",
+                "npm ERR! node_modules/rollup",
+                "npm ERR!   peerOptional rollup@\"^1.20.0||^2.0.0||^3.0.0\" from @rollup/plugin-babel@6.0.3",
+                "npm ERR!   node_modules/@rollup/plugin-babel",
+                "npm ERR!     dev @rollup/plugin-babel@\"6.0.3\" from the root project",
+                "npm ERR! ",
+                "npm ERR! Fix the upstream dependency conflict, or retry",
+                "npm ERR! this command with --force or --legacy-peer-deps",
+                "npm ERR! to accept an incorrect (and potentially broken) dependency resolution.",
+                "npm ERR! ",
+                "npm ERR! ",
+                "npm ERR! For a full report see:",
+                "npm ERR! /home/runner/.npm/_logs/2023-11-06T14_15_57_774Z-eresolve-report.txt",
+                "",
+                "npm ERR! A complete log of this run can be found in: /home/runner/.npm/_logs/2023-11-06T14_15_57_774Z-debug-0.log",
+                "##[error]The operation was canceled.",
+                "Post job cleanup.",
+                "[command]/usr/bin/git version",
+                "git version 2.42.0",
+                "Temporarily overriding HOME='/home/runner/work/_temp/ac91ed3b-4af1-46e6-8f9c-15533eca5201' before making global git config changes",
+                "Adding repository directory to the temporary git global config as a safe directory",
+                "[command]/usr/bin/git config --global --add safe.directory /home/runner/work/vanilla-sharing/vanilla-sharing",
+                "[command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+                "[command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+                "http.https://github.com/.extraheader",
+                "[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader",
+                "[command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+                "Cleaning up orphan processes",
+
+        ],
+    };
+</script>
+<script>
+    function getColor(type) {
+        switch (type) {
+            case "updated": return "#FFF59D";
+            case "added": return "#A5D6A7";
+            case "deleted": return "#EF9A9A";
+            case "moved_updated":
+            case "moved_unchanged": return "#CE93D8";
+            case "none": return "#CE93D8";
+        }
+    }
+
+    let right_actions = [
+            {type: "unchanged", left:1, right:1},
+            {type: "added", left:-1, right:2},
+            {type: "unchanged", left:3, right:3},
+            {type: "unchanged", left:4, right:4},
+            {type: "added", left:-1, right:5},
+            {type: "unchanged", left:6, right:6},
+            {type: "unchanged", left:7, right:7},
+            {type: "unchanged", left:8, right:8},
+            {type: "unchanged", left:9, right:9},
+            {type: "unchanged", left:10, right:10},
+            {type: "unchanged", left:11, right:11},
+            {type: "unchanged", left:12, right:12},
+            {type: "unchanged", left:13, right:13},
+            {type: "unchanged", left:14, right:14},
+            {type: "unchanged", left:15, right:15},
+            {type: "unchanged", left:16, right:16},
+            {type: "unchanged", left:17, right:17},
+            {type: "unchanged", left:18, right:18},
+            {type: "unchanged", left:19, right:19},
+            {type: "unchanged", left:20, right:20},
+            {type: "unchanged", left:21, right:21},
+            {type: "unchanged", left:22, right:22},
+            {type: "unchanged", left:23, right:23},
+            {type: "unchanged", left:24, right:24},
+            {type: "unchanged", left:25, right:25},
+            {type: "unchanged", left:26, right:26},
+            {type: "unchanged", left:27, right:27},
+            {type: "unchanged", left:28, right:28},
+            {type: "unchanged", left:29, right:29},
+            {type: "unchanged", left:30, right:30},
+            {type: "unchanged", left:31, right:31},
+            {type: "unchanged", left:32, right:32},
+            {type: "unchanged", left:33, right:33},
+            {type: "unchanged", left:34, right:34},
+            {type: "unchanged", left:35, right:35},
+            {type: "unchanged", left:36, right:36},
+            {type: "unchanged", left:37, right:37},
+            {type: "unchanged", left:38, right:38},
+            {type: "unchanged", left:39, right:39},
+            {type: "unchanged", left:40, right:40},
+            {type: "unchanged", left:41, right:41},
+            {type: "unchanged", left:42, right:42},
+            {type: "unchanged", left:43, right:43},
+            {type: "unchanged", left:44, right:44},
+            {type: "unchanged", left:45, right:45},
+            {type: "unchanged", left:46, right:46},
+            {type: "unchanged", left:47, right:47},
+            {type: "unchanged", left:48, right:48},
+            {type: "unchanged", left:49, right:49},
+            {type: "unchanged", left:50, right:50},
+            {type: "unchanged", left:51, right:51},
+            {type: "unchanged", left:52, right:52},
+            {type: "unchanged", left:53, right:53},
+            {type: "unchanged", left:54, right:54},
+            {type: "unchanged", left:55, right:55},
+            {type: "unchanged", left:56, right:56},
+            {type: "unchanged", left:57, right:57},
+            {type: "unchanged", left:58, right:58},
+            {type: "unchanged", left:59, right:59},
+            {type: "unchanged", left:60, right:60},
+            {type: "unchanged", left:61, right:61},
+            {type: "unchanged", left:62, right:62},
+            {type: "unchanged", left:63, right:63},
+            {type: "unchanged", left:64, right:64},
+            {type: "added", left:-1, right:65},
+            {type: "unchanged", left:66, right:66},
+            {type: "unchanged", left:67, right:67},
+            {type: "unchanged", left:68, right:68},
+            {type: "unchanged", left:69, right:69},
+            {type: "unchanged", left:70, right:70},
+            {type: "unchanged", left:71, right:71},
+            {type: "unchanged", left:72, right:72},
+            {type: "unchanged", left:73, right:73},
+            {type: "unchanged", left:74, right:74},
+            {type: "unchanged", left:75, right:75},
+            {type: "unchanged", left:76, right:76},
+            {type: "unchanged", left:77, right:77},
+            {type: "unchanged", left:78, right:78},
+            {type: "unchanged", left:79, right:79},
+            {type: "unchanged", left:80, right:80},
+            {type: "unchanged", left:81, right:81},
+            {type: "unchanged", left:82, right:82},
+            {type: "unchanged", left:83, right:83},
+            {type: "unchanged", left:84, right:84},
+            {type: "unchanged", left:85, right:85},
+            {type: "unchanged", left:86, right:86},
+            {type: "unchanged", left:87, right:87},
+            {type: "unchanged", left:88, right:88},
+            {type: "unchanged", left:89, right:89},
+            {type: "unchanged", left:90, right:90},
+            {type: "unchanged", left:91, right:91},
+            {type: "unchanged", left:92, right:92},
+            {type: "unchanged", left:93, right:93},
+            {type: "unchanged", left:94, right:94},
+            {type: "added", left:-1, right:95},
+            {type: "unchanged", left:96, right:96},
+            {type: "added", left:-1, right:97},
+            {type: "unchanged", left:98, right:98},
+            {type: "unchanged", left:99, right:99},
+            {type: "unchanged", left:100, right:100},
+            {type: "unchanged", left:101, right:101},
+            {type: "added", left:-1, right:102},
+            {type: "added", left:-1, right:103},
+            {type: "added", left:-1, right:104},
+            {type: "unchanged", left:105, right:105},
+            {type: "unchanged", left:106, right:106},
+            {type: "added", left:-1, right:107},
+            {type: "unchanged", left:108, right:108},
+            {type: "unchanged", left:109, right:109},
+            {type: "unchanged", left:110, right:110},
+            {type: "unchanged", left:111, right:111},
+            {type: "unchanged", left:112, right:112},
+            {type: "unchanged", left:113, right:113},
+            {type: "unchanged", left:114, right:114},
+            {type: "unchanged", left:115, right:115},
+            {type: "unchanged", left:116, right:116},
+            {type: "unchanged", left:117, right:117},
+            {type: "unchanged", left:118, right:118},
+            {type: "unchanged", left:119, right:119},
+            {type: "unchanged", left:120, right:120},
+            {type: "unchanged", left:121, right:121},
+            {type: "unchanged", left:122, right:122},
+            {type: "unchanged", left:123, right:123},
+            {type: "unchanged", left:124, right:124},
+            {type: "unchanged", left:125, right:125},
+            {type: "unchanged", left:126, right:126},
+            {type: "unchanged", left:127, right:127},
+            {type: "added", left:-1, right:128},
+            {type: "added", left:-1, right:129},
+            {type: "added", left:-1, right:130},
+            {type: "added", left:-1, right:131},
+            {type: "added", left:-1, right:132},
+            {type: "added", left:-1, right:133},
+            {type: "added", left:-1, right:134},
+            {type: "added", left:-1, right:135},
+            {type: "added", left:-1, right:136},
+            {type: "added", left:-1, right:137},
+            {type: "added", left:-1, right:138},
+            {type: "added", left:-1, right:139},
+            {type: "added", left:-1, right:140},
+            {type: "added", left:-1, right:141},
+            {type: "added", left:-1, right:142},
+            {type: "added", left:-1, right:143},
+            {type: "added", left:-1, right:144},
+            {type: "added", left:-1, right:145},
+            {type: "added", left:-1, right:146},
+            {type: "added", left:-1, right:147},
+            {type: "added", left:-1, right:148},
+            {type: "added", left:-1, right:149},
+            {type: "added", left:-1, right:150},
+            {type: "added", left:-1, right:151},
+            {type: "added", left:-1, right:152},
+            {type: "added", left:-1, right:153},
+            {type: "added", left:-1, right:154},
+            {type: "added", left:-1, right:155},
+            {type: "added", left:-1, right:156},
+            {type: "added", left:-1, right:157},
+            {type: "added", left:-1, right:158},
+            {type: "unchanged", left:128, right:159},
+            {type: "added", left:-1, right:160},
+            {type: "added", left:-1, right:161},
+            {type: "unchanged", left:240, right:162},
+            {type: "unchanged", left:241, right:163},
+            {type: "unchanged", left:242, right:164},
+            {type: "added", left:-1, right:165},
+            {type: "unchanged", left:244, right:166},
+            {type: "unchanged", left:245, right:167},
+            {type: "unchanged", left:246, right:168},
+            {type: "unchanged", left:247, right:169},
+            {type: "unchanged", left:248, right:170},
+            {type: "unchanged", left:249, right:171},
+            {type: "unchanged", left:250, right:172},
+            {type: "unchanged", left:251, right:173},
+            {type: "unchanged", left:252, right:174},
+    ]
+
+	// setup the folds between the "added" hunks
+	let folds = [];
+	for (let i = 1; i < right_actions.length; ++i) {
+		if (right_actions[i-1].type != "added" && right_actions[i].type == "added") {
+			let j = 1;
+			while (i-j >= 0 && right_actions[i-j].type != "added") { ++j; }
+			if (j > 6) {  // we keep a window of 3 lines arounds the "added" hunks
+				folds.push({start: i-j+5, end: i-3});
+			}
+		}
+	}
+	// in case there is non "added" lines after the last added line
+	let last_green = right_actions.length - 1;
+	while (right_actions[last_green].type != "added") { --last_green; }
+	if (last_green < right_actions.length - 4) {
+		folds.push({start: last_green + 5, end: right_actions.length});
+	}
+
+    require.config({paths: {'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'}});
+    require(['vs/editor/editor.main'], function () {
+        monaco.languages.register({
+            id: "cidiff",
+        })
+
+        monaco.languages.registerFoldingRangeProvider("cidiff", {
+            provideFoldingRanges: (model, context, token) => folds
+        })
+        let rightEditor = monaco.editor.create(document.getElementById('right'), {
+            value: ciDiff.right.join('\n'),
+            minimap: {enabled: false},
+            readOnly: true,
+            scrollBeyondLastLine: false,
+            language: "cidiff",
+            automaticLayout: true,
+            //wordWrap: "on"
+        });
+        rightEditor.trigger('fold', 'editor.foldAll')
+
+        function ranges(l, r, type) {
+            let sl = ciDiff.left[l].split(/\s/);
+            let sr = ciDiff.right[r].split(/\s/);
+            let x = 0;
+            let j = 0;
+            let arr = [];
+            for (let i = 0; i < sl.length; ++i) {
+                if (sl[i] == "") {
+                    ++x;
+                    continue;
+                }
+                if (sr[j] == "") {
+                    --i;
+                    ++j;
+                    continue;
+                }
+                if (sl[i] != sr[j]) {
+                    arr.push({
+                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sl[i].length),
+                        options: {isWholeLine: false, className: type, overviewRuler: {color: getColor(type)}}
+                    });
+                }
+                x += sl[i].length + 1;
+                ++j;
+            }
+            return arr;
+        }
+
+        function mapToDecorations(actions) {
+            return actions.flatMap((a, i) => {
+                let arr = []
+                if (a.type == "unchanged") {
+                    return arr;
+                }
+                if (a.type.includes("updated")) {
+                    if (a.type == "moved_updated") {
+                        arr.push({
+                            range: new monaco.Range(i + 1, 1, i + 1, 1),
+                            options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                        });
+                    }
+                    //let tmp = ranges(i, left_actions[i].line-1, a.type);
+                    //console.log(i, left_actions[i].line-1, tmp);
+                    arr.push(...ranges(actions[i].left - 1, actions[i].right - 1, a.type));
+                } else {
+                    arr.push({
+                        range: new monaco.Range(i + 1, 1, i + 1, 1),
+                        options: {isWholeLine: true, className: a.type, overviewRuler: {color: getColor(a.type)}}
+                    });
+                }
+                return arr;
+            })
+        }
+
+        let rightDecorations = rightEditor.createDecorationsCollection(mapToDecorations(right_actions));
+
+    });
+</script>
+</body>
+
+</html>
