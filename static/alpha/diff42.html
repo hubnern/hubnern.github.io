@@ -1950,26 +1950,26 @@
             let sl = ciDiff.left[l].split(/\s/);
             let sr = ciDiff.right[r].split(/\s/);
             let x = 0;
-            let j = 0;
+            let i = 0;
             let arr = [];
-            for (let i = 0; i < sr.length; ++i) {
-                if (sl[i] == "") {
+            for (let j = 0; j < sr.length; ++j) {
+                if (sr[j] == "") {
                     ++x;
                     continue;
                 }
-                if (sr[j] == "") {
-                    --i;
-                    ++j;
+                if (sl[i] == "") {
+                    ++i;
+                    --j;
                     continue;
                 }
                 if (sl[i] != sr[j]) {
                     arr.push({
-                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sr[i].length),
+                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sr[j].length),
                         options: {isWholeLine: false, className: type, overviewRuler: {color: getColor(type)}}
                     });
                 }
-                x += sr[i].length + 1;
-                ++j;
+                x += sr[j].length + 1;
+                ++i;
             }
             return arr;
         }
