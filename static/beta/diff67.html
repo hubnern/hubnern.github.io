@@ -1651,7 +1651,7 @@
                 }
                 if (sl[i] != sr[j]) {
                     arr.push({
-                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sl[i].length),
+                        range: new monaco.Range(r + 1, x + 1, r + 1, x + 1 + sr[i].length),
                         options: {isWholeLine: false, className: type, overviewRuler: {color: getColor(type)}}
                     });
                 }
