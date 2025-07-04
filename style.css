@@ -1,0 +1,115 @@
+@font-face {
+	font-family: "ZedPlexMono";
+	/* src: url("ZedPlexSans-Regular.ttf"); */
+	src: url("files/ZedPlexMono.ttf");
+}
+
+:root {
+	/* --font-color: #2C2E3A; */
+	/* --main-bg-color: #E2E2E3; */
+	--main-bg-color: #2C2E3A;
+	--font-color: #E2E2E3;
+	--code-color: #ECC664;
+	--btn-color: #B39DF3;
+}
+
+html {
+	font-family: 'ZedPlexMono', serif, monospace, sans-serif;
+	background-color: var(--main-bg-color);
+	color: var(--font-color);
+}
+
+main {
+	max-width: 800px;
+	margin: auto;
+}
+
+h1 {
+	margin-top: 32px;
+}
+
+h1,
+h2 {
+	color: #76CCE0;
+}
+
+h2 {
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+
+h4 {
+	margin-left: 60px;
+	margin-bottom: -10px;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: #B39DF3;
+}
+
+code {
+	color: var(--code-color);
+	background-color: #354157;
+	font-size: 16px;
+	padding: 0 8px;
+}
+
+ul#publications,
+ul#teaching,
+ul#talk {
+	padding: 0;
+}
+
+ul#publications li,
+ul#teaching li,
+ul#talk li {
+	list-style: none;
+	display: flex;
+	margin: 2em 1em;
+}
+
+ul#publications li::before,
+ul#teaching li::before,
+ul#talk li::before {
+	width: 1em;
+	height: 1em;
+	margin-right: 1.5em;
+}
+
+ul#publications li::before {
+	content: url("files/svg/file-text.svg");
+}
+
+ul#teaching li::before {
+	content: url("files/svg/school.svg");
+}
+
+ul#talk li::before {
+	content: url("files/svg/presentation.svg");
+}
+ul#talk li p:first-of-type a {
+	color: var(--font-color);
+}
+
+p.btn {
+	margin-top: 0.5em;
+}
+
+p.btn a {
+	color: var(--btn-color);
+	transition: color 0.3s, background-color 0.3s, text-decoration-color 0.3s;
+	border: 1px solid var(--btn-color);
+	border-radius: 0.25em;
+	text-decoration: none;
+	padding: 0.3em;
+	font-size: small;
+}
+
+p.btn a:hover {
+	color: var(--main-bg-color);
+	background-color: var(--btn-color);
+}

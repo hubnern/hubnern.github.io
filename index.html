@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Nicolas Hubner">
+	<meta property="og:description" content="Software Engineer PhD student @ LaBRI">
+	<meta property="og:url" content="https://hubnern.github.io">
+	<meta property="og:image" content="https://hubnern.github.io/avatar.png">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Nicolas Hubner</title>
+	<link rel="icon" href="files/avatar.png">
+</head>
+
+<body>
+	<main>
+		<h1>Nicolas Hubner</h1>
+		<p>I'm a PhD student in the Software Engineering team at <a href="https://www.labri.fr">LaBRI</a>.
+			My work focuses on log differencing and analysis.</p>
+
+		<h2>Publications</h2>
+		<div>
+			<ul id="publications">
+				<li>
+					<div>
+						<strong>What Happened in this Pipeline? Diffing Build Logs with CiDiff</strong>
+						<p>N. Hubner, J-R. Falleri, R. Uricaru, T. Degueule, T. Durieux</p>
+						<p>In <em>Proceedings of the ACM on Software Engineering (ISSTA), 2025</em>.</p>
+						<p class="btn">
+							<a href="https://hal.science/hal-05035587/document">Preprint</a>
+							<a href="https://doi.org/10.1145/3728966">DOI</a>
+							<a href="https://github.com/labri-progress/cidiff">Tool</a>
+							<a href="https://doi.org/10.5281/zenodo.12794901">Artefacts</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<h2>Teaching</h2>
+		<div>
+			<ul id="teaching">
+				<li>
+					<div>
+						<strong>Object-Oriented approach</strong>
+						<p><em>University of Bordeaux</em></p>
+						<p class="btn">
+							<a>Master 1</a>
+							<a>fr</a>
+							<a>2024</a>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>Algorithms for tree-based data structures</strong>
+						<p><em>University of Bordeaux</em></p>
+						<p class="btn">
+							<a>Bachelor 2</a>
+							<a>fr</a>
+							<a>2025</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<h2>Talks</h2>
+		<div>
+			<ul id="talk">
+				<li>
+					<div>
+						<strong>What Happened in this Pipeline? Diffing Build Logs with CiDiff</strong>
+							<p>At <a href="https://conf.researchr.org/home/issta-2025"><em>International Symposium on Software Testing and Analysis</a>, Trondheim, Norway, 2025</em>.</p>
+						<p class="btn">
+							<a href="files/cidiff-issta.pdf">Slides</a>
+						</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>What Happened in this Pipeline? Diffing Build Logs with CiDiff</strong>
+							<p>At <a href="https://gdr-gpl-2013-2024.imag.fr/Groupes/VL/Description.html"><em>day of the software velocity working group</a>, Rennes, France, 2025</em>.</p>
+						<p class="btn">
+							<a href="files/cidiff-gt-vl-25.pdf">Slides</a>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+
+		<h2>Contact</h2>
+		<ul>
+			<li><a href="https://github.com/hubnern">GitHub</a> ~ <code>hubnern</code></li>
+			<li><a href="mailto:bmljb2xhcy5odWJuZXJAbGFicmkuZnI=" id="aemail">Email</a> ~
+				<code id="cemail">bmljb2xhcy5odWJuZXJAbGFicmkuZnI=</code> (hover to reveal)
+			</li>
+		</ul>
+
+		<script>
+			document.getElementById("aemail").addEventListener("mouseenter", e => {
+				let data = e.target.href.split(":")[1];
+				let result = atob(data);
+				e.target.href = "mailto:" + result;
+			});
+			document.getElementById("aemail").addEventListener("mouseleave", e => {
+				let data = e.target.href.split(":")[1];
+				let result = btoa(data);
+				e.target.href = "mailto:" + result;
+			});
+			document.getElementById("cemail").addEventListener("mouseenter", e => {
+				e.target.innerText = atob(e.target.innerText);
+			});
+			document.getElementById("cemail").addEventListener("mouseleave", e => {
+				e.target.innerText = btoa(e.target.innerText);
+			});
+		</script>
+	</main>
+</body>
+
+</html>
